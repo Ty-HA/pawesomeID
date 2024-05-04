@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@crossmarkio/sdk": "^0.3.7",
     "@web3auth/base": "^8.3.0",
     "@web3auth/default-evm-adapter": "^8.3.0",
     "@web3auth/ethereum-provider": "^8.3.0",
@@ -16,7 +17,9 @@
     "@web3auth/modal": "^8.3.0",
     "@web3auth/wallet-connect-v2-adapter": "^8.3.0",
     "@web3auth/wallet-services-plugin": "^8.3.0",
+    "@web3auth/xrpl-provider": "^8.4.0",
     "bufferutil": "^4.0.8",
+    "dotenv": "^16.4.5",
     "ethers": "^6.12.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",

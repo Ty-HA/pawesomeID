@@ -8,9 +8,9 @@ import { Metadata } from "next";
 const roboto = Poppins({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Trust Point",
-  description: "Trust Point",
-  keywords: "web, web3, loyalty, blockchain",
+  title: "Pawesome ID",
+  description: "Decentralized Passport for pets",
+  keywords: "web, web3, passport, blockchain, pet, dog, cat",
 };
 
 export default function RootLayout({
@@ -21,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Trust Point</title>
+        <title>PAWESOME ID</title>
+        <script async src="https://xumm.app/assets/cdn/xumm-oauth2-pkce.min.js"></script>
       </head>
 
       <body className={roboto.className}>{children}</body>

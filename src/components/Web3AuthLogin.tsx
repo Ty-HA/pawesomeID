@@ -163,58 +163,13 @@ function Web3AuthLogin() {
           web3auth.configureAdapter(adapter);
         });
 
-        // adding wallet connect v2 adapter
-        // const defaultWcSettings = await getWalletConnectV2Settings("eip155", ["1"], "04309ed1007e77d1f119b85205bb779d");
-        // const walletConnectV2Adapter = new WalletConnectV2Adapter({
-        //   ...(web3AuthOptions as BaseAdapterSettings),
-        //   adapterSettings: { ...defaultWcSettings.adapterSettings },
-        //   loginSettings: { ...defaultWcSettings.loginSettings },
-        // });
-        // web3auth.configureAdapter(walletConnectV2Adapter);
-
-        // // adding metamask adapter
-        // const metamaskAdapter = new MetamaskAdapter(web3AuthOptions as BaseAdapterSettings);
-        // web3auth.configureAdapter(metamaskAdapter);
-
-        // // adding torus evm adapter
-        // const torusWalletAdapter = new TorusWalletAdapter(web3AuthOptions as TorusWalletOptions);
-        // web3auth.configureAdapter(torusWalletAdapter);
-
-        // // adding coinbase adapter
-        // const coinbaseAdapter = new CoinbaseAdapter(web3AuthOptions as CoinbaseAdapterOptions);
-        // web3auth.configureAdapter(coinbaseAdapter);
+       
 
         setWeb3auth(web3auth);
 
         await web3auth.initModal();
 
-        // await web3auth.initModal({
-        //   modalConfig: {
-        //     [WALLET_ADAPTERS.OPENLOGIN]: {
-        //       label: "openlogin",
-        //       loginMethods: {
-        //         // Disable facebook and reddit
-        //         facebook: {
-        //           name: "facebook",
-        //           showOnModal: false
-        //         },
-        //         reddit: {
-        //           name: "reddit",
-        //           showOnModal: false
-        //         },
-        //         // Disable email_passwordless and sms_passwordless
-        //         email_passwordless: {
-        //           name: "email_passwordless",
-        //           showOnModal: false
-        //         },
-        //         sms_passwordless: {
-        //           name: "sms_passwordless",
-        //           showOnModal: false
-        //         }
-        //       }
-        //     }
-        //   }
-        // });
+        
         if (web3auth.connected) {
           setLoggedIn(true);
         }

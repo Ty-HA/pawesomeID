@@ -1,47 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from "flowbite-react";
 
-declare global {
-  interface Window { Xumm: any; }
-}
-
-const XamanButton: React.FC = () => {
-  const [account, setAccount] = useState('...');
+/*
+function XamanButton() {
+  const [xumm, setXumm] = useState<any>(null);
+  const [sub, setSub] = useState('... (please sign in)');
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://xumm.app/assets/cdn/xumm.min.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    script.onload = () => {
-      const xumm = new window.Xumm('your-api-key');
-
-      xumm.on("ready", () => console.log("Ready (e.g. hide loading state of page)"));
-
-      xumm.on("success", async () => {
-        xumm.user.account.then((account: string) => {
-          setAccount(account);
-        });
+    if (window.XummPkce) {
+      const xummInstance = new window.XummPkce('ffa43b6c-27a9-4ce7-88a9-d1d6a594e43f', {
+        implicit: true,
+        redirectUrl: document.location.href + '?custom_state=test'
       });
+      setXumm(xummInstance);
+    }
+  }, []);
 
-      xumm.on("logout", async () => {
-        setAccount('...');
-      });
-    };
+  const handleAuthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    xumm.authorize().catch(e => console.log('e', e));
+  };
 
-    return () => {
-      document.body.removeChild(script);
-    };
+  const handleLogoutClick = () => {
+    xumm.logout();
+    setSub('... (please sign in)');
+  };
+
+  useEffect(() => {
+    xumm.on("error", (error: Error) => {
+      console.log("error", error);
+    });
+
+    xumm.on("success", async () => {
+      const state = await xumm.state();
+      setSub(state?.me?.sub);
+    });
+
+    xumm.on("retrieved", async () => {
+      console.log("Retrieved: from localStorage or mobile browser redirect");
+      const state = await xumm.state();
+      setSub(state?.me?.sub);
+    });
   }, []);
 
   return (
     <div>
-      <h1 id="accountaddress">{account}</h1>
-      <Button id="signinbutton" onClick={() => window.Xumm.authorize()}>Login with Xaman</Button>
-      <Button id="logoutbutton" onClick={() => window.Xumm.logout()}>Logout from Xaman</Button>
+      <h1>Sample</h1>
+      <h2>{sub}</h2>
+      <button onClick={handleAuthClick}>Auth</button>
+      <button onClick={handleLogoutClick}>Logout</button>
+      
     </div>
   );
-};
+}
 
 export default XamanButton;
+*/
