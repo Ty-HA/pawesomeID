@@ -50,9 +50,9 @@ export default function Profile() {
 
   useEffect(() => {
     const getSigner = async () => {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      setSigner(signer);
+      //const provider = new ethers.BrowserProvider(window.ethereum);
+      //const signer = await provider.getSigner();
+      //setSigner(signer);
     };
 
     getSigner();
