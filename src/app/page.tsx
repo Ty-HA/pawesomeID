@@ -2,7 +2,7 @@
 
 const ButtonStart = () => {
   return (
-    <a href="/loginHome" className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white px-2 mt-8 text-lg font-semibold rounded-full whitespace-normal">Start now →</a>
+    <a href="/loginHome" className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white sm:px-12 px-2 mt-8 sm:py-1.5 text-lg font-semibold rounded-full whitespace-nowrap">Start now →</a>
   )
 }
 
