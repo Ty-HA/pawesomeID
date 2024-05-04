@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 
 import NavBar from "../../components/NavBar";
 import Web3AuthLogin from "../../components/Web3AuthLogin";
+import XamanButton from "@/components/XamanButton";
 
 
 export default function LoginHome() {
@@ -17,6 +18,7 @@ export default function LoginHome() {
             <h2 className="text-base text-center md:text-xl font-semibold text-blue-900 mb-8 pr-12 pl-12">Connect your wallet to access to your Account</h2>
           <div className="flex">
             <Web3AuthLogin />
+            <XamanButton />
           </div>
           
         </section>

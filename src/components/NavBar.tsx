@@ -23,7 +23,7 @@ export default function NavBar() {
     <Navbar fluid rounded className="fixed top-0 w-full bg-white py-5 border-b border-grey z-10">
       <Navbar.Brand href="/">
         <Image
-          src="/tp.jpg"
+          src="/logo_full.png"
           alt="Trust Point"
           className="ml-2"
           width={120}
