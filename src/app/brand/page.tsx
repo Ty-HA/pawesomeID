@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import NavBar from "../../components/NavBar";
 import { Button, Card, Label, Select, TextInput } from "flowbite-react";
 import { ethers } from "ethers";
 // import ABI from "./contract-abi.json";
@@ -171,7 +170,7 @@ export default function BrandProfile() {
 
   return (
     <>
-      <NavBar />
+  
       <main className="flex flex-col min-h-screen w-full">
         <section className="flex flex-col justify-center items-center mt-32 w-full">
           <h1 className="mt-2 text-2xl font-semibold text-blue-900 mb-4">

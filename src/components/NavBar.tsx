@@ -27,10 +27,10 @@ export default function NavBar() {
         <Navbar.Toggle />
       <Navbar.Collapse>
         <Navbar.Link href="/home" active className="text-lg flex justify-left items-center mt-2 text-white">
-          Demos
+          Home
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg flex justify-left items-center mt-2 text-white">
-          Pages
+          My pet
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg flex justify-left items-center mt-2 text-white">
           Support
