@@ -5,22 +5,8 @@ import React, { useState, useEffect } from 'react';
 
 import { Button, Card } from "flowbite-react";
 
-import Footer from "../../components/Footer";
 
-export default function MyPets() {
-/*
-  const [userAddress, setUserAddress] = useState<string | null>(null);
-
- useEffect(() => {
-    const fetchUserAddress = async () => {
-      const address = await sdk.sync.signIn();
-      setUserAddress(address);
-    };
-
-    fetchUserAddress();
-  }, []); 
-  // console.log(userAddress);
-  */
+export default function petDetails() {
 
 
   return (
@@ -50,27 +36,19 @@ export default function MyPets() {
               <p className="font-normal text-gray-700 dark:text-gray-400">
                 Shiba
               </p>
-              <Button href="/mypets/petDetails" className="bg-yellow-400">View details</Button>
+              <Button href="/" className="bg-yellow-400">View details</Button>
             </Card>
-            <Card href="#" className="max-w-sm bg-indigo-200">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900">
-                Diego
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Cat
-              </p>
-              <Button className="bg-yellow-400">View details</Button>
-            </Card>
+           
            
            
           </div>
-          <Button href="/mypets/addNewPet" className="bg-yellow-400 mt-4">Add a new pet</Button>
+          
         </section>
 
        
       </main>
       <div className="flex justify-center">
-        <Footer />
+
       </div>
     </>
   );
