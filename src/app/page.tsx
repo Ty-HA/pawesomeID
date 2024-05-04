@@ -1,4 +1,7 @@
 "use client";
+import { Button } from 'flowbite-react';
+
+
 const information = ( title: string, paragraph: string, srcImage: string) => {
   return (
     <div className="sm:w-1/4 px-2">
@@ -27,7 +30,7 @@ const App = () => {
         <p className="text-gray-300 whitespace-normal mt-8 mb-8 mr-8 xl:text-xl text-l">
         Easily access to your pet information and join a pet lovers community to support shelters and ensure safer environments for all animals.
         </p>
-        <a href="/loginHome" className="text-[#68D585] mt-8 text-lg font-semibold rounded-full whitespace-normal">Start a free trial →</a>
+        <Button href="/loginHome" className="text-white bg-yellow-400 mt-8 text-lg font-semibold rounded-full whitespace-normal w-1/2">Start Now →</Button>
       </div>
       <div className="w-1/2 xl:pr-60 lg:pr-32 pr-8">
         <img src="/dog_picture.png" alt="Pet" />

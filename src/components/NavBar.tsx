@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Button, Navbar } from "flowbite-react";
-import Web3AuthLogin from "./Web3AuthLogin";
+import { Navbar } from "flowbite-react";
 import CrossmarkButton from "./CrossmarkButton";
 
 
@@ -17,7 +16,7 @@ export default function NavBar() {
       <Navbar.Brand href="/">
         <Image
           src="/logo_full.png"
-          alt="Trust Point"
+          alt="Pawesome ID logo"
           className="xl:ml-60 lg:ml-32 sm:ml-8"
           width={240}
           height={122}
@@ -26,20 +25,20 @@ export default function NavBar() {
       
         <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="/home" active className="text-lg flex justify-left items-center mt-2 text-white">
+        <Navbar.Link href="/" active className="text-lg flex justify-left items-center mt-2 text-white">
           Home
         </Navbar.Link>
-        <Navbar.Link href="#" className="text-lg flex justify-left items-center mt-2 text-white">
+        <Navbar.Link href="/mypets" className="text-lg flex justify-left items-center mt-2 text-white">
           My pet
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg flex justify-left items-center mt-2 text-white">
-          Support
+          About us
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg flex justify-left items-center mt-2 text-white">
           Contact
         </Navbar.Link>
         <Navbar.Link href="/" className="text-lg flex justify-left items-center xl:mr-60 lg:mr-32 sm:mr-8">
-         <CrossmarkButton />
+         <CrossmarkButton title="Sign In"/>
         </Navbar.Link>
                 
       </Navbar.Collapse>

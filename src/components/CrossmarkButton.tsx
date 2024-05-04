@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import sdk from '@crossmarkio/sdk';
 import { Button } from "flowbite-react";
 
-const CrossmarkButton: React.FC = () => {
+interface CrossmarkButtonProps {
+    title: string;
+  }
+
+const CrossmarkButton: React.FC<CrossmarkButtonProps> = ({title}) => {
   const [walletAddress, setWalletAddress] = useState('');
   const [isConnected, setIsConnected] = useState(false);
 
@@ -16,12 +20,11 @@ const CrossmarkButton: React.FC = () => {
       }
     };
     connect();
-
         
   }, []);
 
-  let userAddress = sdk.sync.signIn();
-  console.log(userAddress);
+  // let userAddress = sdk.sync.signIn();
+  // console.log(userAddress);
 
   const handleConnectWallet = async () => {
     let { request, response, createdAt, resolvedAt } = await sdk.methods.signInAndWait();
@@ -38,7 +41,7 @@ const CrossmarkButton: React.FC = () => {
 
   return (
     <div>
-      {!isConnected && <Button onClick={handleConnectWallet}>Sign In</Button>}
+      {!isConnected && <Button onClick={handleConnectWallet}>{title}</Button>}
       {isConnected && <Button onClick={handleDisconnectWallet}>Disconnect</Button>}
       {walletAddress && <h1>Wallet Address: {walletAddress}</h1>}
     </div>
