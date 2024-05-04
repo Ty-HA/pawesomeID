@@ -16,7 +16,7 @@ interface Points {
 
 export default function Footer() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [userAddress, setAddress] = useState<string | null>(null);
+  /*const [userAddress, setAddress] = useState<string | null>(null);
   const [points, setPoints] = useState<number | null>(null);
   const [data, setData] = useState<string | null>(null);
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null);
@@ -88,32 +88,32 @@ export default function Footer() {
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
-  const qrValue = JSON.stringify({ address: userAddress, points: points });
+  const qrValue = JSON.stringify({ address: userAddress, points: points });*/
 
   return (
     <footer
       className="fixed bottom-10 flex justify-center md:mb-0 mb-2 p-6 border-2 border-purple-800 rounded-full bg-white"
-      onClick={toggleModal}
+      //onClick={toggleModal}
     >
-      <QRCode value={qrValue || ""}  size={50} />      
-      <Modal show={modalIsOpen} onClose={toggleModal}>
+      //<QRCode value={""}  size={50} />      
+      <Modal show={modalIsOpen} onClose={() => {}}>
         <div className="flex flex-col items-center justify-center h-full p-10">
           <h2 className="text-indigo-900 md:text-xl text-base font-semibold mb-6">
             Present your QR code for scanning
           </h2>
           <div className="border border-black p-6 rounded-xl items-center">
-            <QRCode value={qrValue || ""} size={250} fgColor="#331b5c" />
+            <QRCode value={ ""} size={250} fgColor="#331b5c" />
           </div>
           <Button
             className="mt-8 bg-indigo-900 text-white"
-            onClick={toggleModal}
+            //onClick={toggleModal}
           >
             Fermer
           </Button>
           <p className="text-black text-sm mt-4">Function when Brand scan the QR code below</p> 
           <Button
             className="bg-indigo-400 text-white"
-            onClick={() => earnPoints("Points earned by Customer")}
+            //onClick={() => earnPoints("Points earned by Customer")}
           >
             Earn points
           </Button>
