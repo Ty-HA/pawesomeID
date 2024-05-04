@@ -86,16 +86,16 @@ export default function Footer() {
   }, [signer, points, userAddress]);
 
 
-  const toggleModal = () => setModalIsOpen(!modalIsOpen);
+    const qrValue = JSON.stringify({ address: userAddress, points: points });*/
 
-  const qrValue = JSON.stringify({ address: userAddress, points: points });*/
+  const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
   return (
     <footer
       className="fixed bottom-10 flex justify-center md:mb-0 mb-2 p-6 border-2 border-purple-800 rounded-full bg-white"
-      //onClick={toggleModal}
+      onClick={toggleModal}
     >
-      //<QRCode value={""}  size={50} />      
+      <QRCode value={""}  size={50} />      
       <Modal show={modalIsOpen} onClose={() => {}}>
         <div className="flex flex-col items-center justify-center h-full p-10">
           <h2 className="text-indigo-900 md:text-xl text-base font-semibold mb-6">
@@ -106,7 +106,7 @@ export default function Footer() {
           </div>
           <Button
             className="mt-8 bg-indigo-900 text-white"
-            //onClick={toggleModal}
+            onClick={toggleModal}
           >
             Fermer
           </Button>

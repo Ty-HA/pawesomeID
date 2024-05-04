@@ -38,7 +38,7 @@ export default function NavBar() {
         <Navbar.Link href="#" className="text-lg flex justify-left items-center mt-2 text-white">
           Contact
         </Navbar.Link>
-        <Navbar.Link href="/profile" className="text-lg flex justify-left items-center xl:mr-60 lg:mr-32 sm:mr-8">
+        <Navbar.Link href="/" className="text-lg flex justify-left items-center xl:mr-60 lg:mr-32 sm:mr-8">
          <CrossmarkButton />
         </Navbar.Link>
                 
