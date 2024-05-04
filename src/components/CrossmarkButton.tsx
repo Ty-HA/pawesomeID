@@ -9,14 +9,19 @@ const CrossmarkButton: React.FC = () => {
   useEffect(() => {
     const connect = async () => {
       try {
-        let isConnected = sdk.sync.isConnected();
+        sdk.sync.isConnected();
         setIsConnected(true);
       } catch (error) {
         console.error("Failed to connect:", error);
       }
     };
     connect();
+
+        
   }, []);
+
+  let userAddress = sdk.sync.signIn();
+  console.log(userAddress);
 
   const handleConnectWallet = async () => {
     let { request, response, createdAt, resolvedAt } = await sdk.methods.signInAndWait();
@@ -28,6 +33,8 @@ const CrossmarkButton: React.FC = () => {
     setWalletAddress('');
     setIsConnected(false);
   };
+
+  
 
   return (
     <div>
