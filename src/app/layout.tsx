@@ -5,6 +5,7 @@ import { Poppins } from "next/font/google";
 //import Head from "next/head";
 import { Metadata } from "next";
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 const roboto = Poppins({ weight: "400", subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         
           {children}
       </main>
+      <Footer/>
         </>
         </body>
     </html>
