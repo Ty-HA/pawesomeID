@@ -13,7 +13,7 @@ const CrossmarkButton: React.FC = () => {
 
   return (
     <div>
-      <Button onClick={handleConnectWallet}>Se connecter au wallet XRPL</Button>
+      <Button onClick={handleConnectWallet}>Se connecter</Button>
       {walletAddress && <h1>Adresse du wallet: {walletAddress}</h1>}
     </div>
   );
