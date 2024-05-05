@@ -45,7 +45,7 @@ export const pinFileToIPFS = async (jsonData) => {
   return response.data.IpfsHash;
 };
 
-async function fetchFileFromIPFS() {
+export async function fetchFileFromIPFS() {
 const ipfsHash = await pinFileToIPFS();
 //console.log(ipfsHash)
   const url = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${ipfsHash}`;
@@ -58,7 +58,4 @@ const ipfsHash = await pinFileToIPFS();
   }
   return hexUrl;
 }
-module.exports = pinFileToIPFS;
-
-module.exports = fetchFileFromIPFS;
 //pinFileToIPFS();

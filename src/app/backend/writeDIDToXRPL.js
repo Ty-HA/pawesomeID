@@ -9,7 +9,7 @@ async function generateWalletFromSecret(secret) {
 }
 
 // Sets a DID document on the XRP Ledger
-async function setDID(wallet) {
+export async function setDID(wallet) {
     const client = new Client("wss://s.devnet.rippletest.net:51233/");
     await client.connect();
     const hexUrl = await fetchFileFromIPFS();
