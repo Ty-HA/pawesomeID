@@ -1,96 +1,161 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button, Label, TextInput } from "flowbite-react";
 
+const DropdownComponent = (name:string, onClick:(name:string) => void) => {
+  return ( <li>
+    <button onClick={() => onClick(name)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">{name}</button>
+  </li>)
+}
+
 export default function AddNewPet() {
   const [petName, setPetName] = useState("");
-  const [petType, setPetType] = useState("");
+  const [petSpecies, setPetSpecies] = useState("");
+  const [petSex, setPetSex] = useState("");
+  const [petBreed, setPetBreed] = useState("");
+  const [petBirthDay, setPetBirthDay] = useState("");
+  const [petCoat, setPetCoat] = useState("");
+  const [dropDownClicked, setDropDownClicked] = useState(false);
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPetBirthDay(event.target.value);
+  }
+
+  const [menuRef, setMenuRef] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const closer = (event: MouseEvent) => {
+      // Ignore click if the menu is not opened, or the ref not properly defined.
+      if (!dropDownClicked || !menuRef ) return;
+      // Don't close when clicking inside the menu.
+      if (menuRef.contains(event.target as Node)) return;
+      setDropDownClicked(false);
+    };
+
+    document.addEventListener("click", closer);
+    return () => document.removeEventListener("click", closer);
+  }, [menuRef, dropDownClicked]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!petName || !petSpecies || !petBreed || !petBirthDay || !petCoat) {
+      return;
+    }
+    console.log(`Submitting Name ${petName}, Species ${petSpecies}, Breed ${petBreed}, BirthDay ${petBirthDay}, Coat ${petCoat}`);
     event.preventDefault();
-    console.log(`Submitting Name ${petName}, Type ${petType}`);
   };
 
   return (
     <>
       <main className="flex flex-col min-h-screen w-full bg-white">
         <section className="flex flex-col items-center mt-6 w-full">
-          <div className="flex flex-col">
+            <div className="flex sm:max-w-md sm:mx-0 mx-4 flex-col gap-4 mt-4">
             <h1 className="text-base md:text-2xl font-semibold text-blue-900">
               Add your new Pet
             </h1>
-            <div className="flex max-w-md flex-col gap-4 mt-4">
             
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="name" color="info" value="Name" />
+                  <Label htmlFor="name" value="Name" />
                 </div>
                 <TextInput
                   id="name"
                   placeholder="Name"
                   required
-                  color="info"
+                  color="gray"
+                  onChange={(event) => setPetName(event.target.value)}
                 />
               </div>
               <div>
-                <div className="mb-2 block">
-                  <Label
-                    htmlFor="input-success"
-                    color="success"
-                    value="Success"
-                  />
-                </div>
-                <TextInput
-                  id="input-success"
-                  placeholder="Input Success"
-                  required
-                  color="success"
-                />
+                  <div className="w-full">
+                    <Label htmlFor="species" value="Species" />
+                  </div>
               </div>
+                  <button id="dropdown-button" onClick={() => {setDropDownClicked(!dropDownClicked); console.log("yolo")}} data-dropdown-toggle="dropdown" className={`flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center ${petSpecies ? "text-gray-900" : "text-gray-500"} bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600`} type="button">
+                    {petSpecies ? petSpecies : "Select species"} 
+                      <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" d="m1 1 4 4 4-4"/>
+                      </svg>
+                  </button>
+                  <div id="dropdown" ref={setMenuRef} style={{top: "350px"}} className={`z-10 ${dropDownClicked ? "" : "hidden"} absolute z-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 border-2`}>
+            <ul  className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+            {DropdownComponent("Dog", (name:string) => {setPetSpecies(name); setDropDownClicked(false)})}
+            {DropdownComponent("Cat", (name:string) => {setPetSpecies(name); setDropDownClicked(false)})}
+            {DropdownComponent("Rabbit", (name:string) => {setPetSpecies(name); setDropDownClicked(false)})}
+            {DropdownComponent("Horse", (name:string) => {setPetSpecies(name); setDropDownClicked(false)})}
+            </ul>
+        </div>
               <div>
                 <div className="mb-2 block">
                   <Label
-                    htmlFor="input-failure"
-                    color="failure"
-                    value="Failure"
+                    htmlFor="breed"
+                    value="Breed"
                   />
                 </div>
                 <TextInput
-                  id="input-failure"
-                  placeholder="Input Failure"
+                  id="breed"
+                  placeholder="Breed"
                   required
-                  color="failure"
+                  color="gray"
+                  onChange={(event) => setPetBreed(event.target.value)}
                 />
               </div>
+              
               <div>
                 <div className="mb-2 block">
                   <Label
-                    htmlFor="input-warning"
-                    color="warning"
-                    value="Warning"
+                    htmlFor="Sexe"
+                    value="Sexe"
                   />
                 </div>
-                <TextInput
-                  id="input-warning"
-                  placeholder="Input Warning"
-                  required
-                  color="warning"
-                />
+                <div className="flex items-center mt-2 mb-2 ml-2">
+                    <input id="default-checkbox" type="checkbox" checked={petSex == "female"} onChange={() => setPetSex("female")} value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                    <label itemType="default-checkbox" className="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">female</label>
+                </div>
+                <div className="flex items-center ml-2">
+                    <input id="checked-checkbox" type="checkbox" checked={petSex == "male"} onChange={() => setPetSex("male")} value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                    <label itemType="checked-checkbox" className="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">male</label>
+                </div>
+              </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="birthday" value="Birthday" />
+              </div>
+              <div className="relative max-w-sm">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                  <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                  </svg>
+                </div>
+                <input type="date" onChange={handleDateChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"/>
               </div>
             </div>
-          </div>
+            <div>
+                <div className="mb-2 mt-4 block">
+                  <Label
+                    htmlFor="coat"
+                    value="Coat"
+                    />
+                </div>
+                <TextInput
+                  id="coat"
+                  placeholder="Coat"
+                  required
+                  color="gray"
+                  onChange={(event) => setPetCoat(event.target.value)}
+                  />
+              </div>
+            </div>
         </section>
         <section
           id="addPets"
           className="w-full flex flex-col justify-center items-center mt-6 border-t border-grey"
         >
-          <div className="flex mt-6"></div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center md:justify-start items-center animate-slide-in"></div>
-          <Button href="/mypets/addNewPet" className="bg-yellow-400">
+          <Button href="/mypets/addNewPet" className="bg-yellow-400 my-4">
             Validate
           </Button>
+
         </section>
       </main>
       <div className="flex justify-center"></div>
