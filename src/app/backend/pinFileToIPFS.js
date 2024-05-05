@@ -11,7 +11,7 @@ const pinFileToIPFS = async () => {
     Breed: "Dog",
     Sex: "male",
     Birthdate: "2023-20-11",
-    Coat: "Brown"   
+    Coat: "Brown"
   });
   const jsonBuffer = Buffer.from(jsonData, "utf-8");
 
@@ -43,7 +43,7 @@ const pinFileToIPFS = async () => {
         headers: headers,
       },
     );
-    console.log(response.data);
+    //console.log(response.data);
     //return await fetchFileFromIPFS(response.data.IpfsHash);
     return response.data.IpfsHash;
   } catch (error) {
@@ -55,7 +55,7 @@ const pinFileToIPFS = async () => {
 
 async function fetchFileFromIPFS() {
 const ipfsHash = await pinFileToIPFS();
-console.log(ipfsHash)
+//console.log(ipfsHash)
   const url = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${ipfsHash}`;
   const hexUrl = Buffer.from(url).toString('hex');
   try {
@@ -67,5 +67,6 @@ console.log(ipfsHash)
   return hexUrl;
 }
 module.exports = pinFileToIPFS;
+
 module.exports = fetchFileFromIPFS;
 //pinFileToIPFS();
