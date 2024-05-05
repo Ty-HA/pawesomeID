@@ -1,77 +1,100 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-// import sdk from '@crossmarkio/sdk';
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import fetchFileFromIPFS from "../backend/pinFileToIPFS";
 
-import { Button, Card } from "flowbite-react";
+// Import the Card component with ssr set to false
+const Card = dynamic(() => import("flowbite-react").then((mod) => mod.Card), {
+  ssr: false,
+});
 
-import Footer from "../../components/Footer";
+interface DataType {
+  Name: string;
+  Species: string;
+  Breed: string;
+  Sex: string;
+  Birthdate: Date;
+  Coat: string;
+}
 
-export default function MyPets() {
-/*
-  const [userAddress, setUserAddress] = useState<string | null>(null);
+export default function PetDetails() {
+  const [data, setData] = useState<DataType | null>(null);
+  const [hexUrl, setHexUrl] = useState("");
 
- useEffect(() => {
-    const fetchUserAddress = async () => {
-      const address = await sdk.sync.signIn();
-      setUserAddress(address);
+  useEffect(() => {
+    const fetchData = async () => {
+      const hexUrl = await fetchFileFromIPFS();
+      setHexUrl(hexUrl);
+      console.log("Dynamic hexUrl", hexUrl);
     };
+    fetchData();
+  }, []);
+  
+  useEffect(() => {
+    const hexUrl =
+      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D594141504E38564C4365367551725A57434677517641726E316F317945485156746653654633576775733471";
+    // console.log(hexUrl);
+    // Convert the hexadecimal URL back to a string
+    const url = Buffer.from(hexUrl, "hex").toString();
 
-    fetchUserAddress();
-  }, []); 
-  // console.log(userAddress);
-  */
-
+    // Fetch the data from the URL
+    fetch(url)
+      .then((response: Response) => response.json())
+      .then((data: any) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((error: any) => console.error(error));
+  }, []);
 
   return (
-    <>
-      <main className="flex flex-col min-h-screen w-full bg-white">
-        <section className="flex flex-col items-center mt-6 w-full">
-          <div className="flex flex-col">
-            <h1 className="text-base md:text-2xl font-semibold text-blue-900">
-              Manage your Pawesome Pets
-            </h1>
-            
-          </div>
-        
-        </section>
-        <section
-          id="pets"
-          className="w-full flex flex-col justify-center items-center mt-6 border-t border-grey"
-        >
-          <div className="flex mt-12">
-         
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center md:justify-start items-center animate-slide-in">
-            <Card href="#" className="max-w-sm bg-indigo-200 animate-slide-in">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900">
-                Kiko
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Shiba
-              </p>
-              <Button href="/mypets/petDetails" className="bg-yellow-400">View details</Button>
-            </Card>
-            <Card href="#" className="max-w-sm bg-indigo-200">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900">
-                Diego
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Cat
-              </p>
-              <Button className="bg-yellow-400">View details</Button>
-            </Card>
-           
-           
-          </div>
-          <Button href="/mypets/addNewPet" className="bg-yellow-400 mt-4">Add a new pet</Button>
-        </section>
-
-       
-      </main>
-      <div className="flex justify-center">
-        <Footer />
-      </div>
-    </>
+    <main className="flex flex-col min-h-screen w-full bg-white">
+      <section className="flex gap-6 justify-center items-center mt-6 w-full">
+        <div className="flex">
+          <Card
+            className="max-w-sm"
+            renderImage={() => (
+              <Image
+                width={250}
+                height={250}
+                src="/images/shiba.png"
+                alt="image 1"
+              />
+            )}
+          >
+            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {data?.Name} PASSPORT
+            </h5>
+            <p className="text-black">Species: {data?.Species}</p>
+            <p className="text-black">Breed: {data?.Breed}</p>
+            <p className="text-black">Sex: {data?.Sex}</p>
+            <p className="text-black">Coat: {data?.Coat}</p>
+          </Card>
+        </div>
+        <div className="flex flex-col">
+          <Card
+            className="max-w-sm"
+            renderImage={() => (
+              <Image
+                width={250}
+                height={250}
+                src="/images/bunny.jpg"
+                alt="image 1"
+              />
+            )}
+          >
+            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {data?.Name} PASSPORT
+            </h5>
+            <p className="text-black">Species: {data?.Species}</p>
+            <p className="text-black">Breed: {data?.Breed}</p>
+            <p className="text-black">Sex: {data?.Sex}</p>
+            <p className="text-black">Coat: {data?.Coat}</p>
+          </Card>
+        </div>
+      </section>
+    </main>
   );
 }
