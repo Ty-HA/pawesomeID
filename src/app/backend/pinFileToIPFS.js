@@ -6,7 +6,7 @@ const JWT =
 const pinFileToIPFS = async () => {
   const formData = new FormData();
   const jsonData = JSON.stringify({ //This is where we put the animal's characteristics
-    Name: "WIF",
+    Name: "BUNNY",
     Species: "dogwifhat",
     Breed: "Dog",
     Sex: "male",

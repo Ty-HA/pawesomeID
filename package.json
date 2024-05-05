@@ -19,6 +19,7 @@
     "@web3auth/wallet-connect-v2-adapter": "^8.3.0",
     "@web3auth/wallet-services-plugin": "^8.3.0",
     "@web3auth/xrpl-provider": "^8.4.0",
+    "axios": "^1.6.8",
     "bufferutil": "^4.0.8",
     "dotenv": "^16.4.5",
     "ethers": "^6.12.0",
