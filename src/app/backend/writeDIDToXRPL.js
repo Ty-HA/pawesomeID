@@ -13,7 +13,7 @@ async function setDID(wallet) {
     const client = new Client("wss://s.devnet.rippletest.net:51233/");
     await client.connect();
     const hexUrl = await fetchFileFromIPFS();
-    console.log(hexUrl)
+    const url = Buffer.from(hexUrl, 'hex').toString('utf8'); // Convert hexUrl to normal url
     try {
         const prepared = await client.autofill({ 
             "TransactionType": "DIDSet",
