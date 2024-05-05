@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Label, TextInput } from "flowbite-react";
+import { pinFileToIPFS } from "../../backend/pinFileToIPFS";
 
 const DropdownComponent = (name:string, onClick:(name:string) => void) => {
   return ( <li>
@@ -38,12 +39,20 @@ export default function AddNewPet() {
     return () => document.removeEventListener("click", closer);
   }, [menuRef, dropDownClicked]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (!petName || !petSpecies || !petBreed || !petBirthDay || !petCoat) {
+  const handleSubmit = () => {
+    if (!petName || !petSpecies || !petBreed || !petBirthDay || !petCoat || !petSex) {
       return;
     }
     console.log(`Submitting Name ${petName}, Species ${petSpecies}, Breed ${petBreed}, BirthDay ${petBirthDay}, Coat ${petCoat}`);
-    event.preventDefault();
+    const jsonData = JSON.stringify({ //This is where we put the animal's characteristics
+      Name: petName,
+      Species: petSpecies,
+      Breed: petBreed,
+      Sex: petSex,
+      Birthdate: petBirthDay,
+      Coat: petCoat,
+    });
+    pinFileToIPFS(jsonData);
   };
 
   return (
@@ -152,7 +161,7 @@ export default function AddNewPet() {
           id="addPets"
           className="w-full flex flex-col justify-center items-center mt-6 border-t border-grey"
         >
-          <Button href="/mypets/addNewPet" className="bg-yellow-400 my-4">
+          <Button onClick={handleSubmit} className="bg-yellow-400 my-4">
             Validate
           </Button>
 

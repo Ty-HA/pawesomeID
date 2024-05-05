@@ -38,7 +38,7 @@ async function setDID(wallet) {
 }
 
 // Main function for wallet creation and DID setting on the XRP Ledger
-async function main() {
+export async function main() {
     const issuerSecret = "sEdVNQpbEszgeoRPe4o1pvnvqVqvGBf";
     let issuerWallet = await generateWalletFromSecret(issuerSecret);
     //let issuerDIDIpfsHash = "408db59992f378af39e7c4ddc7a96ace826f9475e564ff3e4bfd9d72ee0e667e";
