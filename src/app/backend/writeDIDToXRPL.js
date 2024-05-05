@@ -19,7 +19,8 @@ async function setDID(wallet) {
             "TransactionType": "DIDSet",
             "Account": wallet.address,
             //"DIDDocument": didIpfsHash,
-            "Data": hexUrl
+            "Data": hexUrl,
+            "URI": hexUrl
             
         });
 
