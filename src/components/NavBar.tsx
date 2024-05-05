@@ -7,19 +7,13 @@ import CrossmarkButton from "./CrossmarkButton";
 
 
 export default function NavBar() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const toggleModal = () => setModalIsOpen(!modalIsOpen);
-
-
   return (
     <Navbar fluid rounded className="top-0 w-full py-5 z-10 bg-[15,16,46]">
       <Navbar.Brand href="/">
-        <Image
+        <img
           src="/logo_full.png"
           alt="Pawesome ID logo"
-          className="xl:ml-60 lg:ml-32 sm:ml-8"
-          width={240}
-          height={122}
+          className="xl:ml-60 lg:ml-32 sm:ml-8 ml-4 sm:w-60 w-32 sm:h-10 h-6"
         />
       </Navbar.Brand>
       
