@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import {Button} from "flowbite-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import fetchFileFromIPFS from "../backend/pinFileToIPFS";
@@ -67,10 +68,11 @@ export default function PetDetails() {
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {data?.Name} PASSPORT
             </h5>
-            <p className="text-black">Species: {data?.Species}</p>
+            
             <p className="text-black">Breed: {data?.Breed}</p>
-            <p className="text-black">Sex: {data?.Sex}</p>
-            <p className="text-black">Coat: {data?.Coat}</p>
+         
+            <Button href="/mypets/petDetails" className="bg-yellow-400 mt-4">Pet Details</Button>
+
           </Card>
         </div>
         <div className="flex flex-col">
@@ -86,14 +88,16 @@ export default function PetDetails() {
             )}
           >
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {data?.Name} PASSPORT
+              Boune PASSPORT
             </h5>
-            <p className="text-black">Species: {data?.Species}</p>
-            <p className="text-black">Breed: {data?.Breed}</p>
-            <p className="text-black">Sex: {data?.Sex}</p>
-            <p className="text-black">Coat: {data?.Coat}</p>
+            
+            <p className="text-black">Breed: Finnish Lapphund</p>
+           
+            <Button href="/mypets/petDetails" className="bg-yellow-400 mt-4">Pet Details</Button>
+
           </Card>
         </div>
+        <Button href="/mypets/addNewPet" className="bg-yellow-400 mt-4">Add a new pet</Button>
       </section>
     </main>
   );

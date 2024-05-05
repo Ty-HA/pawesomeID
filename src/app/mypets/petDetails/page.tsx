@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import QRCode from "qrcode.react";
+import { Button, Modal } from "flowbite-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import fetchFileFromIPFS from "../../backend/pinFileToIPFS";
@@ -22,6 +24,9 @@ interface DataType {
 export default function PetDetails() {
   const [data, setData] = useState<DataType | null>(null);
   const [hexUrl, setHexUrl] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +36,7 @@ export default function PetDetails() {
     };
     fetchData();
   }, []);
-  
+
   useEffect(() => {
     const hexUrl =
       "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D594141504E38564C4365367551725A57434677517641726E316F317945485156746653654633576775733471";
@@ -67,6 +72,35 @@ export default function PetDetails() {
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {data?.Name} PASSPORT
             </h5>
+            <div
+              className="flex items-center justify-center mb-2 p-2 border-2 border-purple-800 rounded-full bg-white"
+              onClick={toggleModal}
+            >
+              <QRCode value={""} size={50} />
+              <Modal show={modalIsOpen} onClose={() => {}}>
+                <div className="flex flex-col items-center justify-center h-full p-10">
+                  <h2 className="text-indigo-900 md:text-xl text-base font-semibold mb-6">
+                    Present your QR code for scanning
+                  </h2>
+                  <div className="border border-black p-6 rounded-xl items-center">
+                    <QRCode
+                      value={"did:xrpl:1:rULEePyYopvV9dDaC7uo4f61pT7K8cHNdo"}
+                      size={250}
+                      fgColor="#331b5c"
+                    />
+                  </div>
+                  <p className="text-black mt-2">
+                    did:xrpl:1:rULEePyYopvV9dDaC7uo4f61pT7K8cHNdo
+                  </p>
+                  <Button
+                    className="mt-8 bg-indigo-900 text-white"
+                    onClick={toggleModal}
+                  >
+                    Fermer
+                  </Button>
+                </div>
+              </Modal>
+            </div>
             <p className="text-black">Species: {data?.Species}</p>
             <p className="text-black">Breed: {data?.Breed}</p>
             <p className="text-black">Sex: {data?.Sex}</p>
