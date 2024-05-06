@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import {Button} from "flowbite-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import fetchFileFromIPFS from "../backend/pinFileToIPFS";
+import { fetchFileFromIPFS } from "../backend/pinFileToIPFS";
 
 // Import the Card component with ssr set to false
 const Card = dynamic(() => import("flowbite-react").then((mod) => mod.Card), {
