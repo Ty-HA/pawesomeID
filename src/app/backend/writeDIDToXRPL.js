@@ -1,7 +1,12 @@
 const { Client, Wallet } = require('xrpl');
 const chalk = require('chalk');
 //const hexUrl = require('./pinFileToIPFS.js');
-const fetchFileFromIPFS = require('./pinFileToIPFS.js');
+const { fetchFileFromIPFS } = require('./pinFileToIPFS.js');
+
+const jsonData = 'your JSON data here';
+fetchFileFromIPFS(jsonData)
+  .then(hexUrl => console.log(hexUrl))
+
 // Generates a wallet using a given secret
 async function generateWalletFromSecret(secret) {
     const wallet = Wallet.fromSecret(secret);
@@ -9,7 +14,7 @@ async function generateWalletFromSecret(secret) {
 }
 
 // Sets a DID document on the XRP Ledger
-export async function setDID(wallet) {
+async function setDID(wallet) {
     const client = new Client("wss://s.devnet.rippletest.net:51233/");
     await client.connect();
     const hexUrl = await fetchFileFromIPFS();
@@ -38,7 +43,7 @@ export async function setDID(wallet) {
 }
 
 // Main function for wallet creation and DID setting on the XRP Ledger
-export async function main() {
+async function writeDIDToXRPL() {
     const issuerSecret = "sEdVNQpbEszgeoRPe4o1pvnvqVqvGBf";
     let issuerWallet = await generateWalletFromSecret(issuerSecret);
     //let issuerDIDIpfsHash = "408db59992f378af39e7c4ddc7a96ace826f9475e564ff3e4bfd9d72ee0e667e";
@@ -51,4 +56,6 @@ export async function main() {
 }
 
 // Run the main function and handle any exceptions
-main().catch(error => console.error(chalk.redBright(`Critical error encountered: ${error}`)));
+// writeDIDToXRPL().catch(error => console.error(chalk.redBright(`Critical error encountered: ${error}`)));
+
+module.exports = writeDIDToXRPL;
