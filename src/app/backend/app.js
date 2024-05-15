@@ -32,20 +32,6 @@ app.post('/pinFileToIPFS', async (req, res) => {
   }
 });
 
-app.post('/setDID', async (req, res) => {
-  const { wallet, ipfsHash, uri } = req.body; // Extract uri from the request body
-  if (!wallet || !ipfsHash || !uri) {
-    return res.status(400).json({ error: 'Missing wallet, ipfsHash, or uri' });
-  }
-  try {
-    const result = await setDID(wallet, ipfsHash, uri); // Pass uri to setDID
-    res.json({ result });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: error.toString() });
-  }
-});
-
 
 app.get('/fetchFileFromIPFS', async (req, res) => {
   const ipfsHash = req.query.ipfsHash;
@@ -66,13 +52,17 @@ app.get('/fetchFileFromIPFS', async (req, res) => {
 
 app.post('/writeDIDToXRPL', async (req, res) => {
   try {
-    const ipfsHash = req.body.ipfsHash; // Get the IPFS hash from the request body
-    console.log('ipfsHash reqBody:', ipfsHash);
-    if (!ipfsHash) {
+    const petData = req.body;
+    
+    if (!petData) {
       return res.status(400).json({ error: 'Missing IPFS hash' });
     }
+    const hexUrl = await pinFileToIPFS(petData);
+    console.log('Returned hexUrl from app.js:', hexUrl);
+    const URI = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${hexUrl}`;
+    console.log("uri", URI);
 
-    await writeDIDToXRPL(ipfsHash); // Pass the IPFS hash to the writeDIDToXRPL function
+    await writeDIDToXRPL(petData, URI); // Pass the IPFS hash to the writeDIDToXRPL function
 
     res.json({ message: 'DID written to XRPL' });
   } catch (error) {

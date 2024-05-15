@@ -45,7 +45,7 @@ async function setDID(wallet, ipfsHash, uri) {
             "Account": wallet.address,
             //"DIDDocument": didIpfsHash,
             "Data": ipfsHash,
-            "URI": ipfsURI
+            "URI": uri
             
         });
 
