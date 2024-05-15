@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { fetchFileFromIPFS, pinFileToIPFS } = require('./pinFileToIPFS.js');
-const writeDIDToXRPL = require('./writeDIDToXRPL.js');
+
+const {writeDIDToXRPL, setDID} = require('./writeDIDToXRPL.js');
 
 const app = express();
 
@@ -12,15 +13,52 @@ app.use(express.json());
 
 app.post('/pinFileToIPFS', async (req, res) => {
   const petData = req.body;
+  // console.log('petData reqBody:', petData);
   if (!petData) {
     return res.status(400).json({ error: 'Missing pet data' });
   }
   try {
-    const ipfsHash = await pinFileToIPFS(petData);
-    if (!ipfsHash) {
-      return res.status(500).json({ error: 'Failed to pin file to IPFS' });
+    const hexUrl = await pinFileToIPFS(petData);
+    console.log('Returned hexUrl from app.js:', hexUrl);
+    const URI = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${hexUrl}`;
+    console.log("uri", URI);
+    
+    // const ipfsHash = Buffer.from(hexUrl, 'hex').toString('utf8');
+    // console.log('hexUrl converted into ipfsHash:', ipfsHash);
+    res.json( petData );
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
+app.post('/setDID', async (req, res) => {
+  const { wallet, ipfsHash, uri } = req.body; // Extract uri from the request body
+  if (!wallet || !ipfsHash || !uri) {
+    return res.status(400).json({ error: 'Missing wallet, ipfsHash, or uri' });
+  }
+  try {
+    const result = await setDID(wallet, ipfsHash, uri); // Pass uri to setDID
+    res.json({ result });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
+
+app.get('/fetchFileFromIPFS', async (req, res) => {
+  const ipfsHash = req.query.ipfsHash;
+  console.log('ipfsHash reqQuery:', ipfsHash);
+  if (!ipfsHash) {
+    return res.status(400).json({ error: 'Missing IPFS hash' });
+  }
+  try {
+    const hexUrl = await fetchFileFromIPFS(ipfsHash);
+    if (!hexUrl) {
+      return res.status(500).json({ error: 'Failed to fetch file from IPFS' });
     }
-    res.json({ ipfsHash });
+    res.json({ hexUrl });
   } catch (error) {
     res.status(500).json({ error: error.toString() });
   }
@@ -28,12 +66,20 @@ app.post('/pinFileToIPFS', async (req, res) => {
 
 app.post('/writeDIDToXRPL', async (req, res) => {
   try {
-    await writeDIDToXRPL();
+    const ipfsHash = req.body.ipfsHash; // Get the IPFS hash from the request body
+    console.log('ipfsHash reqBody:', ipfsHash);
+    if (!ipfsHash) {
+      return res.status(400).json({ error: 'Missing IPFS hash' });
+    }
+
+    await writeDIDToXRPL(ipfsHash); // Pass the IPFS hash to the writeDIDToXRPL function
+
     res.json({ message: 'DID written to XRPL' });
   } catch (error) {
     console.error('Error in /writeDIDToXRPL:', error);
     res.status(500).json({ error: error.toString() });
   }
 });
+
 
 app.listen(8080, () => console.log('Server listening on port 8080'));

@@ -44,7 +44,7 @@ export default function PetDetails() {
     fetch(url)
       .then((response: Response) => response.json())
       .then((data: any) => {
-        console.log(data);
+        // console.log(data);
         setData(data);
       })
       .catch((error: any) => console.error(error));

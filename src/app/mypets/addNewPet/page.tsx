@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Label, TextInput, FileInput } from "flowbite-react";
 
-const DropdownComponent = (name: string, onClick: (name: string) => void, key: string | number) => {
+const DropdownComponent = (
+  name: string,
+  onClick: (name: string) => void,
+  key: string | number
+) => {
   return (
     <li key={key}>
       <button
@@ -69,7 +73,7 @@ export default function AddNewPet() {
       petPedigreeNumber
     );
 
-    const petData = {
+    const petData = JSON.stringify({
       //This is where we put the animal's characteristics
       // Avatar: petAvatar,
       Name: petName,
@@ -79,16 +83,17 @@ export default function AddNewPet() {
       Birthdate: petBirthDay,
       Coat: petCoat,
       PedigreeNumber: petPedigreeNumber,
-    };
+    });
 
     try {
+      
       // Make a POST request to the /pinFileToIPFS endpoint
       const response = await fetch("http://localhost:8080/pinFileToIPFS", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(petData),
+        body: petData,
       });
 
       if (!response.ok) {
@@ -96,14 +101,17 @@ export default function AddNewPet() {
       }
 
       const data = await response.json();
-      console.log(data.ipfsHash);
-
+      console.log("Data from front", data);
+      console.log("petData from front", petData);
+           
       // Make a POST request to the /writeDIDToXRPL endpoint
+      
       const response2 = await fetch("http://localhost:8080/writeDIDToXRPL", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(data),
       });
 
       if (!response2.ok) {
@@ -111,9 +119,11 @@ export default function AddNewPet() {
       }
 
       console.log("DID written to XRPL");
+      
     } catch (error) {
       console.error("Failed to submit:", error);
     }
+    
   };
 
   return (
