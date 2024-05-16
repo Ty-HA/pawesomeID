@@ -12,6 +12,6 @@ async function fetchFile(hash) {
   return Buffer.concat(data).toString();
 }
 
-fetchFile('018f3a4ad989db9ee87e38da543648e9d41a4a55354dc754c98ccc9a0ce09177')
+fetchFile('408DB59992F378AF39E7C4DDC7A96ACE826F9475E564FF3E4BFD9D72EE0E667E')
   .then(content => console.log(content))
   .catch(error => console.error(error));

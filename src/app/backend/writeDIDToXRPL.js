@@ -1,6 +1,6 @@
 const { Client, Wallet } = require('xrpl');
 const chalk = require('chalk');
-//const hexUrl = require('./pinFileToIPFS.js');
+
 const { fetchFileFromIPFS } = require('./pinFileToIPFS.js');
 const crypto = require('crypto');
 
@@ -38,14 +38,15 @@ async function setDID(wallet, ipfsHash, uri) {
     await client.connect();
     const ipfsURI = uri;
     console.log('ipfsURI from setDID:', ipfsURI);
+    const hexUrl = Buffer.from(ipfsURI).toString('hex');
    
     try {
         const prepared = await client.autofill({ 
             "TransactionType": "DIDSet",
             "Account": wallet.address,
             //"DIDDocument": didIpfsHash,
-            "Data": ipfsHash,
-            "URI": uri
+            "Data": hexUrl,
+            "URI": hexUrl
             
         });
 

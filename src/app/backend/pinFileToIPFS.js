@@ -1,14 +1,19 @@
 const axios = require("axios");
+const chalk = require('chalk');
 
 const FormData = require("form-data");
 const JWT =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJkYTFlOWQzNC1hNTUzLTRhN2EtODI2NS05OTMyMmFjYzU5YzIiLCJlbWFpbCI6Imd1aWxsYXVtZUB4cnBsLWNvbW1vbnMub3JnIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJGUkExIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9LHsiaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjRiYTE3NjY4MDQzMGFkMzY4MDJkIiwic2NvcGVkS2V5U2VjcmV0IjoiMWJmNmY0OGI5MjE1Y2Y5YWQ4N2MyZGQxOWYxNGMwM2E5YjRiNzY1MTdmNDkzY2NkMTI3Y2UxNmMwZDg1YTA1NCIsImlhdCI6MTcxNDgzMDI2OX0.uiVlk-mRDsktFNYjz1TVMiiqQ1UIhlRYDgMDvn-Z7L4";
 
 const pinFileToIPFS = async (petData) => {
-  // Convert the Buffer to a Blob
-  // const jsonBlob = new Blob([jsonBuffer], { type: 'application/json' });
+  console.log(chalk.green("petData from pinFile: ", petData));
+
+  if (!petData) {
+    console.error("petData is undefined");
+    return;
+  }
   /*
-  const petData = JSON.stringify({ 
+  const jsonData = JSON.stringify({ 
     Name: "TEST",
     Species: "TEST",
     Breed: "Dog",
@@ -17,8 +22,13 @@ const pinFileToIPFS = async (petData) => {
     Coat: "TEST",
     PedigreeNumber: "123456",
   });
+
+  const jsonBuffer = Buffer.from(jsonData, "utf-8");
 */
+/*
   const jsonData = JSON.stringify(petData);
+
+  console.log(chalk.green("jsonData from pinFile: ", jsonData));
 
   if (!jsonData) {
     console.error("jsonData is undefined");
@@ -26,8 +36,13 @@ const pinFileToIPFS = async (petData) => {
   }
 
   const jsonBuffer = Buffer.from(jsonData, "utf-8");
+  */
 
   const formData = new FormData();
+
+  const jsonData = JSON.stringify(petData);
+
+  const jsonBuffer = Buffer.from(jsonData, "utf-8");
 
   // Append the Buffer as a file to FormData
   formData.append("file", jsonBuffer, {
@@ -73,12 +88,18 @@ async function fetchFileFromIPFS(petData) {
   //console.log(ipfsHash)
   const url = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${ipfsHash}`;
   const hexUrl = Buffer.from(url).toString("hex");
-  console.log("TEST hexUrl:", hexUrl);
+  console.log(chalk.yellow("TEST hexUrl from fetchFile:", hexUrl));
   const pinataIPFSlink = `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
   // .log("TEST data from IPFS from pinFile:", pinataIPFSlink);
   try {
     const response = await axios.get(url);
-    const data = JSON.parse(response.data);
+    console.log(chalk.yellow('Response data:', response.data));
+    let data;
+    if (typeof response.data === 'string') {
+      data = JSON.parse(response.data);
+    } else {
+      data = response.data;
+    }
     console.log("Fetched dataNAME from IPFS from pinFile:", data.Name);
     console.log("Fetched data from IPFS from pinFile:", response.data);
   } catch (error) {

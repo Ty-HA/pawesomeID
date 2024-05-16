@@ -1,4 +1,5 @@
 "use client";
+const chalk = require("chalk");
 
 import React, { useEffect, useState } from "react";
 
@@ -67,13 +68,8 @@ export default function AddNewPet() {
     ) {
       return;
     }
-    console.log(
-      `Submitting Name ${petName}, Species ${petSpecies}, Breed ${petBreed}, BirthDay ${petBirthDay}, Coat ${petCoat}`,
-      petSex,
-      petPedigreeNumber
-    );
-
-    const petData = JSON.stringify({
+    
+    const petData = {
       //This is where we put the animal's characteristics
       // Avatar: petAvatar,
       Name: petName,
@@ -83,17 +79,19 @@ export default function AddNewPet() {
       Birthdate: petBirthDay,
       Coat: petCoat,
       PedigreeNumber: petPedigreeNumber,
-    });
+    };
+
+    console.log(chalk.green("Sending PetData: ", JSON.stringify(petData)));
+    
 
     try {
-      
       // Make a POST request to the /pinFileToIPFS endpoint
       const response = await fetch("http://localhost:8080/pinFileToIPFS", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: petData,
+        body: JSON.stringify(petData),
       });
 
       if (!response.ok) {
@@ -101,11 +99,10 @@ export default function AddNewPet() {
       }
 
       const data = await response.json();
-      console.log("Data from front", data);
-      console.log("petData from front", petData);
-           
+      console.log(chalk.blue("Data from front: ", JSON.stringify(data)));
+     
       // Make a POST request to the /writeDIDToXRPL endpoint
-      
+
       const response2 = await fetch("http://localhost:8080/writeDIDToXRPL", {
         method: "POST",
         headers: {
@@ -118,12 +115,10 @@ export default function AddNewPet() {
         throw new Error(response2.statusText);
       }
 
-      console.log("DID written to XRPL");
-      
+      console.log(chalk.green("DID written to XRPL"));
     } catch (error) {
       console.error("Failed to submit:", error);
     }
-    
   };
 
   return (
@@ -156,13 +151,14 @@ export default function AddNewPet() {
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="name" value="Name" />
+                <Label htmlFor="name" value="name" />
               </div>
               <TextInput
                 id="name"
                 placeholder="Name"
                 required
                 color="gray"
+                autoComplete="name"
                 onChange={(event) => setPetName(event.target.value)}
               />
             </div>
@@ -172,7 +168,7 @@ export default function AddNewPet() {
               </div>
             </div>
             <button
-              id="dropdown-button"
+              id="species"
               onClick={() => {
                 setDropDownClicked(!dropDownClicked);
                 console.log("yolo");
@@ -233,11 +229,11 @@ export default function AddNewPet() {
 
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="Sexe" value="Sexe" />
+                <Label htmlFor="sex-female" value="Sexe" />
               </div>
               <div className="flex items-center mt-2 mb-2 ml-2">
                 <input
-                  id="default-checkbox"
+                  id="sex-female"
                   type="checkbox"
                   checked={petSex == "female"}
                   onChange={() => setPetSex("female")}
@@ -245,6 +241,7 @@ export default function AddNewPet() {
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
+                  htmlFor="sex-female"
                   itemType="default-checkbox"
                   className="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
@@ -253,7 +250,7 @@ export default function AddNewPet() {
               </div>
               <div className="flex items-center ml-2">
                 <input
-                  id="checked-checkbox"
+                  id="sex-male"
                   type="checkbox"
                   checked={petSex == "male"}
                   onChange={() => setPetSex("male")}
@@ -261,6 +258,7 @@ export default function AddNewPet() {
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
+                  htmlFor="sex-male"
                   itemType="checked-checkbox"
                   className="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
@@ -285,6 +283,7 @@ export default function AddNewPet() {
                   </svg>
                 </div>
                 <input
+                  id="birthday"
                   type="date"
                   onChange={handleDateChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
