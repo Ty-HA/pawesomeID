@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import { Button, Modal } from "flowbite-react";
 import dynamic from "next/dynamic";
@@ -19,6 +19,7 @@ interface DataType {
   Sex: string;
   Birthdate: Date;
   Coat: string;
+  PedigreeNumber: string;
 }
 
 export default function PetDetails() {
@@ -28,6 +29,8 @@ export default function PetDetails() {
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
+  
+  
   useEffect(() => {
     const fetchData = async () => {
       const hexUrl = await fetchFileFromIPFS();
@@ -38,11 +41,12 @@ export default function PetDetails() {
   }, []);
 
   useEffect(() => {
+
     const hexUrl =
-      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D556255413434766E654E354C74486E587A50664B466D57453277456B546A7776784B7A385752727956696171";
-    // console.log(hexUrl);
+      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D614B3942424D516357566D42725162506F38594D62356B6648454A474E6B354E314C35563238656841764534";
+      
     // Convert the hexadecimal URL back to a string
-    const url = Buffer.from(hexUrl, "hex").toString();
+    const url = Buffer.from(hexUrl, "hex").toString('utf8');
 
     // Fetch the data from the URL
     fetch(url)
@@ -52,7 +56,9 @@ export default function PetDetails() {
         setData(data);
       })
       .catch((error: any) => console.error(error));
-  }, []);
+  }, [hexUrl]);
+
+
 
   return (
     <main className="flex flex-col min-h-screen w-full bg-white">
@@ -105,6 +111,7 @@ export default function PetDetails() {
             <p className="text-black">Breed: {data?.Breed}</p>
             <p className="text-black">Sex: {data?.Sex}</p>
             <p className="text-black">Coat: {data?.Coat}</p>
+            <p className="text-black">Pedigree: {data?.PedigreeNumber}</p>
           </Card>
         </div>
       </section>

@@ -3,7 +3,7 @@ const chalk = require("chalk");
 
 import React, { useEffect, useState } from "react";
 
-import { Button, Label, TextInput, FileInput } from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 
 const DropdownComponent = (
   name: string,
@@ -127,7 +127,7 @@ export default function AddNewPet() {
         <section className="flex flex-col items-center mt-6 w-full">
           <div className="flex sm:max-w-md sm:mx-0 mx-4 flex-col gap-4 mt-4">
             <h1 className="text-base md:text-2xl font-semibold text-blue-900">
-              Add your new Pet
+              Register your new Pet
             </h1>
             <div>
               {/*<div id="fileUpload" className="max-w-md">
