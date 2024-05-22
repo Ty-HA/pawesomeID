@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Navbar } from "flowbite-react";
-import CrossmarkButton from "./CrossmarkButton";
+// import CrossmarkButton from "./CrossmarkButton";
+import Web3AuthLogin from "./web3auth/Web3AuthLogin";
 
 
 export default function NavBar() {
@@ -32,7 +33,7 @@ export default function NavBar() {
           Contact
         </Navbar.Link>
         <Navbar.Link href="/" className="text-lg flex justify-left items-center xl:mr-60 lg:mr-32 sm:mr-8">
-         <CrossmarkButton title="Sign In"/>
+          <Web3AuthLogin />
         </Navbar.Link>
                 
       </Navbar.Collapse>

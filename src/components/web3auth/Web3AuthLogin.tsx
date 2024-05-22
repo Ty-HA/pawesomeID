@@ -85,7 +85,7 @@ const chainConfig = {
 
 
 const chainConfig = {  
-    chainId: "0x1440002", // hex of 421614
+    chainId: `0x${(1440002).toString(16)}`,
     rpcTarget: "https://rpc-evm-sidechain.xrpl.org",
     chainNamespace: CHAIN_NAMESPACES.EIP155,
     displayName: "XRPL Testnet",
@@ -497,12 +497,12 @@ function Web3AuthLogin() {
     await login(); // Assuming login is an async function
     await authenticateUser();
     await getAccounts();
-    router.push("/home");
+    router.push("/");
   };
 
   const unloggedInView = (
     <Button onClick={loginAndRedirect} gradientDuoTone="greenToBlue">
-      Web3Auth login
+      WEB3AUTH LOGIN
     </Button>
   );
 

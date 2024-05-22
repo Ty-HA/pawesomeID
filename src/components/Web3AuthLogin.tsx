@@ -6,6 +6,7 @@ import { CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK } from "@web3auth/base";
 import { CommonPrivateKeyProvider } from "@web3auth/base-provider";
 import { Web3Auth, Web3AuthOptions } from "@web3auth/modal";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
+// import { XrplPrivateKeyProvider } from "@web3auth/xrpl-provider";
 import { Button } from "flowbite-react";
 
 import RPC from "./viem"; // for using viem
@@ -48,7 +49,7 @@ const chainConfig = {
 */
 
 const chainConfig = {  
-  chainId: "0x160002", // hex of 1440002
+  chainId: "0x3", 
   rpcTarget: "https://rpc-evm-sidechain.xrpl.org",
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   displayName: "XRPL EVM Sidechain Devnet",
@@ -148,7 +149,7 @@ function Web3AuthLogin() {
         // Wallet Services Plugin
         const walletServicesPlugin = new WalletServicesPlugin();
         setWalletServicesPlugin(walletServicesPlugin);
-        web3auth.addPlugin(walletServicesPlugin);
+        // web3auth.addPlugin(walletServicesPlugin);
 
         // read more about adapters here: https://web3auth.io/docs/sdk/pnp/web/adapters/
 
@@ -410,12 +411,12 @@ function Web3AuthLogin() {
     await login(); // Assuming login is an async function
     await authenticateUser();
     await getAccounts();
-    router.push("/home");
+    router.push("/");
   };
 
   const unloggedInView = (
     <Button onClick={loginAndRedirect} gradientDuoTone="greenToBlue">
-      WEB3AUTH TEST LOGIN
+      LOGIN
     </Button>
   );
 
