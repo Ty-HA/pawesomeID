@@ -5,6 +5,7 @@ import React from "react";
 // import Web3AuthLogin from "../../components/Web3AuthLogin";
 // import XamanButton from "@/components/XamanButton";
 import CrossmarkButton from "@/components/CrossmarkButton";
+import Web3AuthLogin from "@/components/web3auth/Web3AuthLogin";
 
 const walletButton = (title: string, imgSrc: string) => {
   return (
@@ -32,7 +33,8 @@ export default function LoginHome() {
 
           or import wallet
           </p>
-          {walletButton("Connect MetaMask", "/image/metamask-logo.png")}
+          <Web3AuthLogin />
+         
           {walletButton("Connect Heirloom", "/image/heirloom-logo.png")}
           {walletButton("Connect WalletCoin", "/image/wallet-coin-logo.png")}
 

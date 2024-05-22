@@ -29,9 +29,24 @@ import { getDefaultExternalAdapters } from "@web3auth/default-evm-adapter";
 // const clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ"; // testget from https://dashboard.web3auth.io
 
 const clientId =
-  "BLsAgZAaq1X0jFUxiKcWkMO9EjlA5Qb7HjVbWDdHLLHQsyovE9V9daN2ul08Sj9NxUG770uOeoKtYUS0pksWItY";
+  "BLi5szv7yoBwiw1CdmLZcWfGU4vn_wmuuY9b0RSbOB4xpzg_FYB5_EOw50M6QEj2d5ScMrGvuJJgjET0NXyAfts";
 
-// chainConfig for Arbitrum Sepolia
+// chainConfig for Polygon Mainnet
+/*
+const chainConfig = {
+  chainId: "0x13882", // Please use 0x1 for ETH Mainnet, 0x89 for Polygon Mainnet
+  rpcTarget: "https://rpc.ankr.com/polygon_amoy",
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  displayName: "Polygon Amoy Testnet",
+  blockExplorerUrl: "https://amoy.polygonscan.com/",
+  ticker: "MATIC",
+  tickerName: "MATIC",
+  logo: "https://cryptologos.cc/logos/polygon-matic-logo.png",
+};
+*/
+
+
+// chainConfig for Arbitrum Sepolia worked on previous project
 /*
 const chainConfig = {  
   chainId: "0x66eee", // hex of 421614
@@ -46,22 +61,49 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.png",
 };
 */
+/*
+Network Name : XRPL EVM Sidechain Devnet
+New RPC URL : https://rpc-evm-sidechain.xrpl.org
+Chain ID : 1440002
+Currency Symbol : XRP
+Block Explorer : https://evm-sidechain.xrpl.org
 
 const chainConfig = {  
-  chainId: "0x160002", // hex of 1440002
-  rpcTarget: "https://rpc-evm-sidechain.xrpl.org",
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  displayName: "XRPL EVM Sidechain Devnet",
-  blockExplorerUrl: "https://evm-sidechain.xrpl.org",
-  ticker: "XRP",
-  tickerName: "XRP",
-  logo: "https://cryptologos.cc/logos/xrp-xrp-logo.png",
+    chainId: "1440002", // hex of 421614
+    rpcTarget: "https://s.altnet.rippletest.net:51234/",
+    chainNamespace: CHAIN_NAMESPACES.EIP155,
+    // Avoid using public rpcTarget in production.
+    // Use services like Infura, Quicknode etc
+    displayName: "XRPL Testnet",
+    blockExplorerUrl: "https://testnet.xrpl.org",
+    ticker: "XRP",
+    tickerName: "XRP",
+    logo: "https://cryptologos.cc/logos/xrp-xrp-logo.png",
+
+};
+*/
+
+
+const chainConfig = {  
+    chainId: "0x1440002", // hex of 421614
+    rpcTarget: "https://rpc-evm-sidechain.xrpl.org",
+    chainNamespace: CHAIN_NAMESPACES.EIP155,
+    displayName: "XRPL Testnet",
+    blockExplorerUrl: "https://evm-sidechain.xrpl.org",
+    ticker: "XRP",
+    tickerName: "XRP",
+    logo: "https://cryptologos.cc/logos/xrp-xrp-logo.png",
+
 };
 
 
-const privateKeyProvider = new CommonPrivateKeyProvider({
+/* const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
-});
+}); */
+
+const privateKeyProvider = new CommonPrivateKeyProvider({
+    config: { chainConfig },
+  });
 
 // Web3auth popup modal options
 const web3AuthOptions: Web3AuthOptions = {
@@ -160,13 +202,58 @@ function Web3AuthLogin() {
           web3auth.configureAdapter(adapter);
         });
 
-       
+        // adding wallet connect v2 adapter
+        // const defaultWcSettings = await getWalletConnectV2Settings("eip155", ["1"], "04309ed1007e77d1f119b85205bb779d");
+        // const walletConnectV2Adapter = new WalletConnectV2Adapter({
+        //   ...(web3AuthOptions as BaseAdapterSettings),
+        //   adapterSettings: { ...defaultWcSettings.adapterSettings },
+        //   loginSettings: { ...defaultWcSettings.loginSettings },
+        // });
+        // web3auth.configureAdapter(walletConnectV2Adapter);
+
+        // // adding metamask adapter
+        // const metamaskAdapter = new MetamaskAdapter(web3AuthOptions as BaseAdapterSettings);
+        // web3auth.configureAdapter(metamaskAdapter);
+
+        // // adding torus evm adapter
+        // const torusWalletAdapter = new TorusWalletAdapter(web3AuthOptions as TorusWalletOptions);
+        // web3auth.configureAdapter(torusWalletAdapter);
+
+        // // adding coinbase adapter
+        // const coinbaseAdapter = new CoinbaseAdapter(web3AuthOptions as CoinbaseAdapterOptions);
+        // web3auth.configureAdapter(coinbaseAdapter);
 
         setWeb3auth(web3auth);
 
         await web3auth.initModal();
 
-        
+        // await web3auth.initModal({
+        //   modalConfig: {
+        //     [WALLET_ADAPTERS.OPENLOGIN]: {
+        //       label: "openlogin",
+        //       loginMethods: {
+        //         // Disable facebook and reddit
+        //         facebook: {
+        //           name: "facebook",
+        //           showOnModal: false
+        //         },
+        //         reddit: {
+        //           name: "reddit",
+        //           showOnModal: false
+        //         },
+        //         // Disable email_passwordless and sms_passwordless
+        //         email_passwordless: {
+        //           name: "email_passwordless",
+        //           showOnModal: false
+        //         },
+        //         sms_passwordless: {
+        //           name: "sms_passwordless",
+        //           showOnModal: false
+        //         }
+        //       }
+        //     }
+        //   }
+        // });
         if (web3auth.connected) {
           setLoggedIn(true);
         }
@@ -415,7 +502,7 @@ function Web3AuthLogin() {
 
   const unloggedInView = (
     <Button onClick={loginAndRedirect} gradientDuoTone="greenToBlue">
-      WEB3AUTH TEST LOGIN
+      Web3Auth login
     </Button>
   );
 
