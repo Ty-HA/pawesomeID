@@ -14,19 +14,13 @@ import RPC from "./viem"; // for using viem
 // source here: https://github.dev/Web3Auth/web3auth-pnp-examples/tree/main/web-modal-sdk/blockchain-connection-examples/evm-modal-example
 
 // Providers
-import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+// import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 
 // Wallet Services
 import { WalletServicesPlugin } from "@web3auth/wallet-services-plugin";
 
 // Adapters
 import { getDefaultExternalAdapters } from "@web3auth/default-evm-adapter";
-// import { WalletConnectV2Adapter, getWalletConnectV2Settings } from "@web3auth/wallet-connect-v2-adapter";
-// import { MetamaskAdapter } from "@web3auth/metamask-adapter";
-// import { TorusWalletAdapter, TorusWalletOptions } from "@web3auth/torus-evm-adapter";
-// import { CoinbaseAdapter, CoinbaseAdapterOptions } from "@web3auth/coinbase-adapter";
-
-// const clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ"; // testget from https://dashboard.web3auth.io
 
 const clientId =
   "BLi5szv7yoBwiw1CdmLZcWfGU4vn_wmuuY9b0RSbOB4xpzg_FYB5_EOw50M6QEj2d5ScMrGvuJJgjET0NXyAfts";
@@ -86,9 +80,10 @@ const chainConfig = {
 
 const chainConfig = {  
     chainId: `0x${(1440002).toString(16)}`,
+    // chainId: "0x3",
     rpcTarget: "https://rpc-evm-sidechain.xrpl.org",
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    displayName: "XRPL Testnet",
+    displayName: "XRPL EVM Sidechain Devnet",
     blockExplorerUrl: "https://evm-sidechain.xrpl.org",
     ticker: "XRP",
     tickerName: "XRP",
@@ -502,7 +497,7 @@ function Web3AuthLogin() {
 
   const unloggedInView = (
     <Button onClick={loginAndRedirect} gradientDuoTone="greenToBlue">
-      WEB3AUTH LOGIN
+      LOGIN
     </Button>
   );
 

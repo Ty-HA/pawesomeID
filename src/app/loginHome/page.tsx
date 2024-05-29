@@ -2,9 +2,6 @@
 
 import React from "react";
 
-// import Web3AuthLogin from "../../components/Web3AuthLogin";
-// import XamanButton from "@/components/XamanButton";
-import CrossmarkButton from "@/components/CrossmarkButton";
 import Web3AuthLogin from "@/components/web3auth/Web3AuthLogin";
 
 const walletButton = (title: string, imgSrc: string) => {
@@ -31,9 +28,8 @@ export default function LoginHome() {
           </div>
           <p className="md:text-xl font-semibold text-gray-500 mt-8">
 
-          or connect with:
-          </p>
-          
+          or connect with your DID:
+          </p>          
          
           {walletButton("Heirloom", "/image/heirloom-logo.png")}
  

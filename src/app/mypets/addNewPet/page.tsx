@@ -3,7 +3,7 @@ const chalk = require("chalk");
 
 import React, { useEffect, useState } from "react";
 
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, Modal, Label, TextInput } from "flowbite-react";
 
 const DropdownComponent = (
   name: string,
@@ -32,8 +32,13 @@ export default function AddNewPet() {
   const [petCoat, setPetCoat] = useState("");
   const [petPedigreeNumber, setPetPedigreeNumber] = useState("");
   const [dropDownClicked, setDropDownClicked] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const petSpeciesOptions = ["Dog", "Cat", "Rabbit", "Horse"];
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPetBirthDay(event.target.value);
@@ -68,7 +73,7 @@ export default function AddNewPet() {
     ) {
       return;
     }
-    
+
     const petData = {
       //This is where we put the animal's characteristics
       // Avatar: petAvatar,
@@ -82,7 +87,6 @@ export default function AddNewPet() {
     };
 
     console.log(chalk.green("Sending PetData: ", JSON.stringify(petData)));
-    
 
     try {
       // Make a POST request to the /pinFileToIPFS endpoint
@@ -100,7 +104,7 @@ export default function AddNewPet() {
 
       const data = await response.json();
       console.log(chalk.blue("Data from front: ", JSON.stringify(data)));
-     
+
       // Make a POST request to the /writeDIDToXRPL endpoint
 
       const response2 = await fetch("http://localhost:8080/writeDIDToXRPL", {
@@ -116,6 +120,7 @@ export default function AddNewPet() {
       }
 
       console.log(chalk.green("DID written to XRPL"));
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Failed to submit:", error);
     }
@@ -324,6 +329,15 @@ export default function AddNewPet() {
           <Button onClick={handleSubmit} className="bg-yellow-400 my-4">
             Validate
           </Button>
+          <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal.Header>Pet Submitted</Modal.Header>
+            <Modal.Body>
+              <p className="text-black">Your pet has been successfully submitted.</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+            </Modal.Footer>
+          </Modal>
         </section>
       </main>
       <div className="flex justify-center"></div>

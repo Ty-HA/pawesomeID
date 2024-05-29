@@ -43,7 +43,7 @@ export default function PetDetails() {
   useEffect(() => {
 
     const hexUrl =
-      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D614B3942424D516357566D42725162506F38594D62356B6648454A474E6B354E314C35563238656841764534";
+      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D654656466B37506E66796855667078665A5654365A636761744E4C63456A6167534D4D7471337751504D616A";
       
     // Convert the hexadecimal URL back to a string
     const url = Buffer.from(hexUrl, "hex").toString('utf8');
@@ -70,7 +70,7 @@ export default function PetDetails() {
               <Image
                 width={250}
                 height={250}
-                src="/images/shiba.png"
+                src="/images/dog.jpg"
                 alt="image 1"
               />
             )}
