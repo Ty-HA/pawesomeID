@@ -22,7 +22,7 @@ app.post('/pinFileToIPFS', async (req, res) => {
   try {
     const hexUrl = await pinFileToIPFS(petData);
     console.log(chalk.green('Returned hexUrl from app.js:', hexUrl));
-    const URI = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${hexUrl}`;
+    const URI = `https://maroon-rapid-marten-423.mypinata.cloud/ipfs/${hexUrl}`;
     console.log(chalk.blue("uri", URI));
     
     // const ipfsHash = Buffer.from(hexUrl, 'hex').toString('utf8');
@@ -61,7 +61,7 @@ app.post('/writeDIDToXRPL', async (req, res) => {
     }
     const hexUrl = await pinFileToIPFS(petData);
     console.log(chalk.blue('Returned hexUrl from app.js:', hexUrl));
-    const URI = `https://crimson-active-cuckoo-676.mypinata.cloud/ipfs/${hexUrl}`;
+    const URI = `https://gateway.pinata.cloud/ipfs/${hexUrl}`;
     console.log(chalk.yellow("uri from writeToXRPL", URI));
 
     await writeDIDToXRPL(petData, URI); // Pass the IPFS hash to the writeDIDToXRPL function

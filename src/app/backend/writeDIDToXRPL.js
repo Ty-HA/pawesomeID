@@ -39,7 +39,7 @@ async function fetchPetData(petData) {
   return petDataHash;
 }
 
-const prefixPinata = "https://gateway.pinata.cloud/ipfs/";
+
 
 // Generates a wallet using a given secret
 async function generateWalletFromSecret(secret) {
@@ -67,6 +67,7 @@ async function setDID(wallet, petDataHash, uri) {
 
   const PK = wallet.publicKey;
   
+  /*
 
   const didDocument = {
     "@context": "https://www.w3.org/ns/did/v1",
@@ -94,14 +95,18 @@ async function setDID(wallet, petDataHash, uri) {
   const didDocumentString = JSON.stringify(didDocument);
   console.log("DID Document String:", didDocumentString);
   
+  */
   // TO DO: put DIDDoc on IPFS
+
+  const didDocument = `https://gateway.pinata.cloud/ipfs/QmPSs8ZbJWYgUq9FNbfV1cX4oZuqtaSkQrZFFwf5TSuJeH`;
+  const didDocumentHexUrl= Buffer.from(didDocument).toString("hex");
   
 
   try {
     const prepared = await client.autofill({
       TransactionType: "DIDSet",
       Account: wallet.address,
-      // DIDDocument: didDocumentBlob,
+      DIDDocument: didDocumentHexUrl,
       Data: hexUrl,
       // NetworkID: 140002, //The network ID of the network to which this transaction is submitted.      
       URI: hexUrl,
