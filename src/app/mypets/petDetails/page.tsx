@@ -43,7 +43,7 @@ export default function PetDetails() {
   useEffect(() => {
 
     const hexUrl =
-      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D654656466B37506E66796855667078665A5654365A636761744E4C63456A6167534D4D7471337751504D616A";
+      "68747470733A2F2F6372696D736F6E2D6163746976652D6375636B6F6F2D3637362E6D7970696E6174612E636C6F75642F697066732F516D50535445794B735731527A5572455766464151696A5568436756324C5372367142397850615934315837546B";
       
     // Convert the hexadecimal URL back to a string
     const url = Buffer.from(hexUrl, "hex").toString('utf8');
@@ -75,8 +75,8 @@ export default function PetDetails() {
               />
             )}
           >
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {data?.Name} PASSPORT
+            <h5 className="text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
+              {data?.Name}
             </h5>
             <div
               className="flex items-center justify-center mb-2 p-2 border-2 border-purple-800 rounded-full bg-white"

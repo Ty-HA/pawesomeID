@@ -44,12 +44,15 @@ const prefixPinata = "https://gateway.pinata.cloud/ipfs/";
 // Generates a wallet using a given secret
 async function generateWalletFromSecret(secret) {
   const wallet = Wallet.fromSecret(secret);
+  console.log("Wallet from generateWalletSecret:", wallet);
+  // console.log("Wallet publicKey:", wallet.publicKey);
   console.log("Wallet address:", wallet.address);
   return wallet;
 }
 // Sets a DID document on the XRP Ledger
 async function setDID(wallet, petDataHash, uri) {
-  console.log("wallet:", wallet);
+  
+  console.log(chalk.green("wallet.publicKey:", wallet.publicKey)); 
   console.log("petDataHash:", petDataHash);
   console.log("uri:", uri);
 
@@ -60,15 +63,10 @@ async function setDID(wallet, petDataHash, uri) {
   const hexUrl = Buffer.from(ipfsURI).toString("hex");
 
   const did = `did:xrpl:1:${wallet.address}`;
-  console.log("DID:", did);
-  /*
+  console.log(chalk.yellow("DID:", did));
 
-  const privateKey = Buffer.from(process.env.PRIVATE_KEY_TEST_ISSUER, "hex");
-
-  // const publicKey = EthereumUtil.privateToPublic(privateKey);
-  // Test
-
-  // console.log(publicKey.toString('hex'));
+  const PK = wallet.publicKey;
+  
 
   const didDocument = {
     "@context": "https://www.w3.org/ns/did/v1",
@@ -79,26 +77,36 @@ async function setDID(wallet, petDataHash, uri) {
         id: `${did}#keys-1`,
         type: "EcdsaSecp256k1RecoveryMethod2020",
         controller: did,
-        publicKeyHex: publicKeyForAssertion,
+        publicKeyHex: PK,
       },
     ],
     service: [
       {
         id: `${did}#profile`,
         type: "Public Profile",
-        serviceEndpoint: prefixPinata + ipfsURI,
+        serviceEndpoint: uri,
       },
     ],
   };
-  */
+
+  console.log("DID Document:", didDocument);
+
+  const didDocumentString = JSON.stringify(didDocument);
+  console.log("DID Document String:", didDocumentString);
+  
+  // TO DO: put DIDDoc on IPFS
+  
 
   try {
     const prepared = await client.autofill({
       TransactionType: "DIDSet",
       Account: wallet.address,
-      DIDDocument: petDataHash,
+      // DIDDocument: didDocumentBlob,
       Data: hexUrl,
+      // NetworkID: 140002, //The network ID of the network to which this transaction is submitted.      
       URI: hexUrl,
+      SigningPubKey: PK,
+      
     });
 
     console.log("Prepared:", prepared);
