@@ -11,12 +11,12 @@ import Web3AuthLogin from "./web3auth/Web3AuthLogin";
 export default function NavBar() {
   return (
     <>
-      <Navbar fluid rounded className="top-0 w-full py-5 z-10 bg-[15,16,46] ">
+      <Navbar fluid rounded className="top-0 w-full py-4 z-10 bg-[15,16,46] ">
         <Navbar.Brand href="/">
           <Image
             src="/logo_full.png"
             alt="Pawesome ID logo"
-            className="xl:ml-60 lg:ml-32 sm:ml-8 ml-4 sm:w-60 w-32 sm:h-10 h-6"
+            className="xl:ml-60 lg:ml-32 sm:ml-8 ml-4 sm:w-60 w-32 sm:h-10"
             width="200"
             height="50"
           />
@@ -26,7 +26,7 @@ export default function NavBar() {
         <Navbar.Collapse>
           <Navbar.Link
             href="/"
-            active
+            
             className="text-lg flex justify-left items-center text-white"
           >
             Home
