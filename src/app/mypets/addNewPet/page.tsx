@@ -29,8 +29,13 @@ export default function AddNewPet() {
   const [petSex, setPetSex] = useState("");
   const [petBreed, setPetBreed] = useState("");
   const [petBirthDay, setPetBirthDay] = useState("");
+  const [petOrigin, setPetOrigin] = useState("");
   const [petCoat, setPetCoat] = useState("");
+  const [petEyesColor, setPetEyesColor] = useState("");
   const [petPedigreeNumber, setPetPedigreeNumber] = useState("");
+  const [PetIdIssueDate, setPetIdIssueDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [dropDownClicked, setDropDownClicked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,6 +47,12 @@ export default function AddNewPet() {
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPetBirthDay(event.target.value);
+  };
+
+  const handleIssueDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPetIdIssueDate(event.target.value);
   };
 
   const [menuRef, setMenuRef] = useState<HTMLDivElement | null>(null);
@@ -59,17 +70,20 @@ export default function AddNewPet() {
     return () => document.removeEventListener("click", closer);
   }, [menuRef, dropDownClicked]);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (
       !petName ||
       !petSpecies ||
       !petBreed ||
-      !petBirthDay ||
-      !petCoat ||
       !petSex ||
-      !petPedigreeNumber
+      !petBirthDay ||
+      !petOrigin ||
+      !petCoat ||
+      !petEyesColor ||   
+      !petPedigreeNumber ||
+      !PetIdIssueDate
     ) {
       return;
     }
@@ -82,8 +96,11 @@ export default function AddNewPet() {
       Breed: petBreed,
       Sex: petSex,
       Birthdate: petBirthDay,
+      Origin: petOrigin,
       Coat: petCoat,
+      EyesColor: petEyesColor,
       PedigreeNumber: petPedigreeNumber,
+      IdIssueDate: PetIdIssueDate,
     };
 
     console.log(chalk.green("Sending PetData: ", JSON.stringify(petData)));
@@ -156,7 +173,7 @@ export default function AddNewPet() {
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="name" value="name" />
+                <Label htmlFor="name" value="Name" />
               </div>
               <TextInput
                 id="name"
@@ -234,14 +251,14 @@ export default function AddNewPet() {
 
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="sex-female" value="Sexe" />
+                <Label htmlFor="sex-female" value="Sex" />
               </div>
               <div className="flex items-center mt-2 mb-2 ml-2">
                 <input
                   id="sex-female"
                   type="checkbox"
-                  checked={petSex == "female"}
-                  onChange={() => setPetSex("female")}
+                  checked={petSex == "F"}
+                  onChange={() => setPetSex("F")}
                   value=""
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -250,15 +267,15 @@ export default function AddNewPet() {
                   itemType="default-checkbox"
                   className="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
-                  female
+                  F
                 </label>
               </div>
               <div className="flex items-center ml-2">
                 <input
                   id="sex-male"
                   type="checkbox"
-                  checked={petSex == "male"}
-                  onChange={() => setPetSex("male")}
+                  checked={petSex == "M"}
+                  onChange={() => setPetSex("M")}
                   value=""
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
@@ -267,7 +284,7 @@ export default function AddNewPet() {
                   itemType="checked-checkbox"
                   className="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
-                  male
+                  M
                 </label>
               </div>
             </div>
@@ -298,6 +315,18 @@ export default function AddNewPet() {
             </div>
             <div>
               <div className="mb-2 mt-4 block">
+                <Label htmlFor="origin" value="Origin" />
+              </div>
+              <TextInput
+                id="origin"
+                placeholder="Origin ex: FRA"
+                required
+                color="gray"
+                onChange={(event) => setPetOrigin(event.target.value)}
+              />
+            </div>
+            <div>
+              <div className="mb-2 mt-4 block">
                 <Label htmlFor="coat" value="Coat" />
               </div>
               <TextInput
@@ -306,6 +335,18 @@ export default function AddNewPet() {
                 required
                 color="gray"
                 onChange={(event) => setPetCoat(event.target.value)}
+              />
+            </div>
+            <div>
+              <div className="mb-2 mt-4 block">
+                <Label htmlFor="eyescolor" value="Eyes color" />
+              </div>
+              <TextInput
+                id="eyescolor"
+                placeholder="Eyes color"
+                required
+                color="gray"
+                onChange={(event) => setPetEyesColor(event.target.value)}
               />
             </div>
             <div>
@@ -320,19 +361,40 @@ export default function AddNewPet() {
                 onChange={(event) => setPetPedigreeNumber(event.target.value)}
               />
             </div>
+            <div>
+              <div className="mb-2 mt-4 block">
+                <Label htmlFor="IdIssueDate" value="Issue Date" />
+              </div>
+              <TextInput
+                id="IdIssueDate"
+                placeholder="Issue Date (today)"
+                required
+                color="gray"
+                value={PetIdIssueDate}
+               
+              />
+            </div>
           </div>
         </section>
         <section
           id="addPets"
           className="w-full flex flex-col justify-center items-center mt-6 border-t border-grey"
         >
-          <Button onClick={handleSubmit} className="bg-yellow-400 my-4">
+          <Button
+            onClick={(event: React.MouseEvent) => {
+              console.log("Button clicked");
+              handleSubmit(event);
+            }}
+            className="bg-yellow-400 my-4"
+          >
             Validate
           </Button>
           <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
             <Modal.Header>Pet Submitted</Modal.Header>
             <Modal.Body>
-              <p className="text-black">Your pet has been successfully submitted.</p>
+              <p className="text-black">
+                Your pet has been successfully submitted.
+              </p>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={() => setIsModalOpen(false)}>Close</Button>
