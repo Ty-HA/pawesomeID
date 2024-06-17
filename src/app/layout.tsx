@@ -1,9 +1,11 @@
 import React from "react";
+import { Metadata } from "next";
 
 import "./globals.css";
+import Providers from "@/app/provider";
 import { Poppins } from "next/font/google";
 //import Head from "next/head";
-import { Metadata } from "next";
+
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
@@ -30,7 +32,7 @@ export default function RootLayout({
         <NavBar/>
 
       <main className="flex flex-col items-center justify-between">        
-          {children}
+      <Providers>{children}</Providers>
       </main>
       <Footer/>
         </>

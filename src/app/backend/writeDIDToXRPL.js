@@ -1,172 +1,174 @@
 require("dotenv").config();
 
 const { Client, Wallet } = require("xrpl");
-const EthereumUtil = require("ethereumjs-util");
-
 const chalk = require("chalk");
-
-const { fetchFileFromIPFS } = require("./pinFileToIPFS.js");
+const axios = require("axios");
+const FormData = require("form-data");
 const crypto = require("crypto");
 
-/*
-const petData = "your petData json here"
+const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwZjE1MTkzYS1kMzRkLTQxYWMtYjMxMy01NzcyYWIyZjVlNjUiLCJlbWFpbCI6ImJpY2h0eS5oYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMWExZjJhZWVjZWE4ODdlNTk4NDQiLCJzY29wZWRLZXlTZWNyZXQiOiI1N2E4MGQyMzUxNDQ1ZjNmYWY3ZmMzYzM1NWZlNTU0M2JiYjUxYWEzNGQyZjdmNzQ1YzZhYTEzNTU4NDlmZTNjIiwiaWF0IjoxNzE3MDg3MTMzfQ.i8Ofn3R7nm2xyJrODuyDJu-xz3h7b_t4EfEUvCBBoH0";
 
-fetchFileFromIPFS(petData)
-  .then(hexUrl => console.log(hexUrl))
-  */
 
 async function fetchPetData(petData) {
-  // Convert petData to a string and hash it
-  console.log("petData retrieved from app.js:", petData);
-  const petDataString = JSON.stringify(petData);
-  const petDataHash = crypto
-    .createHash("sha256")
-    .update(petDataString)
-    .digest("hex");
-  console.log("petDataHash:", petDataHash);
-
-  if (!petDataHash) {
-    throw new Error("Failed to compute petData hash");
-  }
-
-  // Use petDataHash here
-  fetchFileFromIPFS(petDataHash)
-    .then((hexUrl) => console.log(hexUrl))
-    .then((ipfsLink) => console.log(ipfsLink))
-    // handle errors
-    .catch((error) => console.error(error));
-
-  return petDataHash;
-}
-
-
-
-// Generates a wallet using a given secret
-async function generateWalletFromSecret(secret) {
-  const wallet = Wallet.fromSecret(secret);
-  console.log("Wallet from generateWalletSecret:", wallet);
-  // console.log("Wallet publicKey:", wallet.publicKey);
-  console.log("Wallet address:", wallet.address);
-  return wallet;
-}
-// Sets a DID document on the XRP Ledger
-async function setDID(wallet, petDataHash, uri) {
-  
-  console.log(chalk.green("wallet.publicKey:", wallet.publicKey)); 
-  console.log("petDataHash:", petDataHash);
-  console.log("uri:", uri);
-
-  const client = new Client("wss://s.devnet.rippletest.net:51233/");
-  await client.connect();
-  const ipfsURI = uri;
-  console.log("ipfsURI from setDID:", ipfsURI);
-  const hexUrl = Buffer.from(ipfsURI).toString("hex");
-
-  const did = `did:xrpl:1:${wallet.address}`;
-  console.log(chalk.yellow("DID:", did));
-
-  const PK = wallet.publicKey;
-  
-  /*
-
-  const didDocument = {
-    "@context": "https://www.w3.org/ns/did/v1",
-    id: did,
-    controller: did,
-    verificationMethod: [
-      {
-        id: `${did}#keys-1`,
-        type: "EcdsaSecp256k1RecoveryMethod2020",
-        controller: did,
-        publicKeyHex: PK,
-      },
-    ],
-    service: [
-      {
-        id: `${did}#profile`,
-        type: "Public Profile",
-        serviceEndpoint: uri,
-      },
-    ],
-  };
-
-  console.log("DID Document:", didDocument);
-
-  const didDocumentString = JSON.stringify(didDocument);
-  console.log("DID Document String:", didDocumentString);
-  
-  */
-  // TO DO: put DIDDoc on IPFS
-
-  const didDocument = `https://gateway.pinata.cloud/ipfs/QmPSs8ZbJWYgUq9FNbfV1cX4oZuqtaSkQrZFFwf5TSuJeH`;
-  const didDocumentHexUrl= Buffer.from(didDocument).toString("hex");
-  
-
   try {
+    const petDataString = JSON.stringify(petData);
+    const petDataHash = crypto.createHash("sha256").update(petDataString).digest("hex");
+    console.log("Computed petDataHash:", petDataHash);
+    return petDataHash;
+  } catch (error) {
+    console.error("Error fetching pet data:", error);
+    throw error;
+  }
+}
+
+async function generateWalletFromSecret(secret) {
+  try {
+    const wallet = Wallet.fromSecret(secret);
+    console.log("Generated Wallet:", wallet);
+    console.log("Wallet address:", wallet.address);
+    return wallet;
+  } catch (error) {
+    console.error("Error generating wallet:", error);
+    throw error;
+  }
+}
+
+async function pinDidDocumentToIPFS(didDocument) {
+  try {
+    console.log(chalk.green("didDocument from pinFile:", JSON.stringify(didDocument, null, 2)));
+
+    if (!didDocument) {
+      throw new Error("didDocument is undefined");
+    }
+
+    const formData = new FormData();
+    const jsonData = JSON.stringify(didDocument);
+    const jsonBuffer = Buffer.from(jsonData, "utf-8");
+
+    formData.append("file", jsonBuffer, {
+      filename: "didDocument.json",
+      contentType: "application/json",
+    });
+
+    formData.append(
+      "pinataOptions",
+      JSON.stringify({
+        cidVersion: 0,
+      })
+    );
+
+    const headers = {
+      Authorization: "Bearer " + JWT, 
+      ...formData.getHeaders(),
+    };
+
+    const response = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
+      headers: headers,
+    });
+
+    console.log("IPFS Pin Response:", response.data);
+
+    return response.data.IpfsHash;
+  } catch (error) {
+    console.error("Error pinning DID document to IPFS:", error);
+    throw error;
+  }
+}
+
+async function setDID(wallet, petDataHash, uri) {
+  let client;
+  try {
+    console.log(chalk.green("wallet.publicKey:", wallet.publicKey));
+    console.log("petDataHash:", petDataHash);
+    console.log("uri:", uri);
+
+    const client = new Client("wss://s.devnet.rippletest.net:51233/");
+    await client.connect();
+
+    const did = `did:xrpl:1:${wallet.address}`;
+    console.log(chalk.yellow("DID:", did));
+
+    const PK = wallet.publicKey;
+
+    const didDocument = {
+      "@context": "https://www.w3.org/ns/did/v1",
+      id: did,
+      controller: did,
+      verificationMethod: [
+        {
+          id: `${did}#keys-1`,
+          type: "EcdsaSecp256k1RecoveryMethod2020",
+          controller: did,
+          publicKeyHex: PK,
+        },
+      ],
+      service: [
+        {
+          id: `${did}#profile`,
+          type: "Public Profile",
+          serviceEndpoint: uri,
+        },
+      ],
+    };
+
+    const didDocumentHexUrl = Buffer.from(JSON.stringify(didDocument)).toString("hex");
+    console.log("DID Document HexUrl:", didDocumentHexUrl);
+
+    const ipfsHash = await pinDidDocumentToIPFS(didDocument);
+    const ipfsUrl = `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
+    const hexUrl = Buffer.from(ipfsUrl).toString("hex");
+
+    console.log("IPFS URL:", ipfsUrl);
+    console.log("Hex URL:", hexUrl);
+
+   
     const prepared = await client.autofill({
       TransactionType: "DIDSet",
       Account: wallet.address,
-      DIDDocument: didDocumentHexUrl,
-      Data: hexUrl,
-      // NetworkID: 140002, //The network ID of the network to which this transaction is submitted.      
+      // DIDDocument: didDocumentHexUrl,
+    // Data: hexUrl,
       URI: hexUrl,
       SigningPubKey: PK,
-      
+      // LastLedgerSequence: lastLedgerSequence,
     });
 
-    console.log("Prepared:", prepared);
+    console.log("Prepared Transaction:", prepared);
+    console.log("Prepared Transaction bis:", JSON.stringify(prepared, null, 2));
 
-    let signedTransaction = wallet.sign(prepared);
-
+    const signedTransaction = wallet.sign(prepared);
     const result = await client.submitAndWait(signedTransaction.tx_blob);
-    // console.log(chalk.blue(`Transaction result: ${JSON.stringify(result, null, 2)}`));
+
+    console.log(chalk.green("Transaction result:", result));
+
     return result;
   } catch (error) {
-    console.error(chalk.red(`Error setting DID: ${error}`));
-    return null;
+    console.error(chalk.red("Error setting DID:", error));
+    throw error;
   } finally {
-    await client.disconnect();
+    if (client) {
+      await client.disconnect();
+    }
   }
 }
 
-// Main function for wallet creation and DID setting on the XRP Ledger
 async function writeDIDToXRPL(petData, uri) {
   try {
-    // issuer Xaman old
-    const issuerSecret = "sEdVNQpbEszgeoRPe4o1pvnvqVqvGBf";
-    
-    // Issuer Metamask test
-    // const issuerSecret = "a4c7d42bb3e78b9ba1183327f4af41fae35b16d4aea3d014aa4a64fabcbbc159";
+    const issuerSecret = "sEd7zMpi74XGJzs2Emb59XkhPukoHPp";
+    const issuerWallet = await generateWalletFromSecret(issuerSecret);
+    const issuerPetDataHash = await fetchPetData(petData);
+    const issuerResult = await setDID(issuerWallet, issuerPetDataHash, uri);
 
-    let issuerWallet = await generateWalletFromSecret(issuerSecret);
-    // console.log('Issuer wallet:', issuerWallet);
-
-    //let issuerDIDIpfsHash = "408db59992f378af39e7c4ddc7a96ace826f9475e564ff3e4bfd9d72ee0e667e";
-    const issuerPetPetDataHash = await fetchPetData(petData);
-    // console.log('issuerPetPetDataHash:', issuerPetPetDataHash);
-    // console.log('uri:', uri);
-    const issuerResult = await setDID(issuerWallet, issuerPetPetDataHash, uri);
-    // console.log(chalk.blue(`Issuer Transaction result: ${JSON.stringify(issuerResult, null, 2)}`));
-
-    // OLD
-    const userSecret = "sEdToEk5mVUqxTq7bS5zbBK7PXLDbsp";
-    // const userSecret = "a4c7d42bb3e78b9ba1183327f4af41fae35b16d4aea3d014aa4a64fabcbbc159";
-    let userWallet = await generateWalletFromSecret(userSecret);
-    //let userDIDIpfsHash = "dffafde488960b37a54f648889e2aa4d493a609f4a078cc96780a53da3811793";
-
-    const userPetPetDataHash = await fetchPetData(petData);
-    const userResult = await setDID(userWallet, userPetPetDataHash, uri);
-    // console.log(chalk.blue(`User Transaction result: ${JSON.stringify(userResult, null, 2)}`));
+    const userSecret = "sEdSCyD96eVH9nK7jMAGkdTvx8AVgBD";
+    const userWallet = await generateWalletFromSecret(userSecret);
+    const userPetDataHash = await fetchPetData(petData);
+    const userResult = await setDID(userWallet, userPetDataHash, uri);
 
     return { issuerTx: issuerResult?.tx?.hash, userTx: userResult?.tx?.hash };
   } catch (error) {
-    console.error(chalk.red(`Error writing DID to XRPL: ${error}`));
-    return null;
+    console.error(chalk.red("Error writing DID to XRPL:", error));
+    throw error;
   }
 }
-
-// Run the main function and handle any exceptions
-// writeDIDToXRPL().catch(error => console.error(chalk.redBright(`Critical error encountered: ${error}`)));
 
 module.exports = {
   writeDIDToXRPL,
