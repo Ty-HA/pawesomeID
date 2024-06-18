@@ -2,10 +2,11 @@
 const xrpl = require('xrpl');
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
+const chalk = require('chalk');
 
 // Issuer information
-const issuerDid = 'did:xrpl:1:rBvPGAgiBQWeFz8MwXmXi3TLqptUf9ViFe';
-const issuerPrivateKey = 'sEdVNQpbEszgeoRPe4o1pvnvqVqvGBf';
+const issuerDid = 'did:xrpl:1:r9UVfG5LnWNMaCyHLWBHhrT37jUiuQ2azE';
+const issuerPrivateKey = 'sEd7zMpi74XGJzs2Emb59XkhPukoHPp';
 
 // Function to sign data with a private key
 function signData(data, privateKey) {
@@ -24,6 +25,10 @@ async function createAndSignVC(didIssuer, didUser, privateKeyIssuerForAssertion,
         "issuanceDate": new Date().toISOString(),
         "credentialSubject": {
             "id": didUser,
+            "credential": {
+                "type": "Passport",
+                "name": "Pawesome Passport ID"
+            },
             "pet": petProfile
         }
     };
@@ -47,8 +52,8 @@ async function createAndSignVC(didIssuer, didUser, privateKeyIssuerForAssertion,
 
 // Main function to create and sign a Verifiable Credential (VC) for your pet "Wiwi"
 async function main() {
-    const userDID = "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ";
-    const issuerDID = "did:xrpl:1:rffGVvdyzRxT1KJLs6K4ZaNj5LiDJGxNvu";
+    const userDID = "did:xrpl:1:rDm3i9buZ76gZe8oPmGDzn7x4UUfyhYn3h";
+    const issuerDID = "did:xrpl:1:r9UVfG5LnWNMaCyHLWBHhrT37jUiuQ2azE";
     const issuerPrivateKeyForAssertion = '0041A2F8C0D2CAFC0E2DDC6BD490F047B091FD6F2BEFA942E59C8AFEED91235667';
 
     const petProfile = {
@@ -62,12 +67,13 @@ async function main() {
         "Coat": "Grey Domino",
         "EyesColor": "Brown",
         "Microchip": "2500269604711389FRA",
-        "PedigreeNumber": "4564894615",
-        "IdIssueDate": "2024-06-13"
+        "PedigreeNumber": "123456",
+        "IdIssueDate": "2024-06-18"
       }
 
     const vc = await createAndSignVC(issuerDID, userDID, issuerPrivateKeyForAssertion, petProfile);
     console.log(JSON.stringify(vc, null, 2));
+    console.log(chalk.green("create VC ok"));
 }
 
 main();

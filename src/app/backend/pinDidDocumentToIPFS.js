@@ -9,11 +9,15 @@ const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaW
   // endpoint with PetProfile
   const uri = 'https://gateway.pinata.cloud/ipfs/QmZSr6uRdYx7GtWNUACqTiRcF2n4rVCN8zoJNiEcvQ6vSU';
   const PK = 'EDC6CAF48E5A0F55B124136E4ABF723F965C50B6E5DCB5B47E44FD2230F6971562'
+
+  const userDid = `did:xrpl:1:rDm3i9buZ76gZe8oPmGDzn7x4UUfyhYn3h`;
+
+  // The vet conrols the DID, id and controller = IssuerDID
   
   const didDocument = {
     "@context": "https://www.w3.org/ns/did/v1",
     id: did,
-    controller: did,
+    controller: userDid,
     verificationMethod: [
       {
         id: `${did}#keys-1`,

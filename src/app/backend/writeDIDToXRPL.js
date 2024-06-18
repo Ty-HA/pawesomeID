@@ -98,7 +98,7 @@ async function setDID(wallet, petDataHash, uri) {
   */
   // TO DO: put DIDDoc on IPFS
 
-  const didDocument = `https://gateway.pinata.cloud/ipfs/QmPTmvC24YFvhwR2oGNs7uXEDnnCtr9258TeLTfWmd28Ye`;
+  const didDocument = `https://gateway.pinata.cloud/ipfs/QmYAvmddEoM7q5wbBrcQ26tq4sE7qqhpNF86qT1TKespAq`;
   const didDocumentHexUrl= Buffer.from(didDocument).toString("hex");
   
 

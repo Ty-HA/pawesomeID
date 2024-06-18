@@ -15,6 +15,7 @@ const Card = dynamic(() => import("flowbite-react").then((mod) => mod.Card), {
 });
 
 interface DataType {
+  Owner: string;
   Name: string;
   Species: string;
   Breed: string;
@@ -27,7 +28,10 @@ interface DataType {
   PedigreeNumber: string;
   IdIssueDate: Date;
   id: string;
+  controller: string;
 }
+
+
 
 export default function PetDetails() {
   const [data, setData] = useState<DataType | null>(null);
@@ -48,8 +52,8 @@ export default function PetDetails() {
   }, []);
 
   useEffect(() => {
-    const hexUrl = "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516D5A457A353145697265654B35426E3155557978737A3438575946544B5648633969424D4E6F43583133314C36";
-    const didDocument = "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516D50546D76433234594676687752326F474E7337755845446E6E4374723932353854654C5466576D6432385965";
+    const hexUrl = "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516D526134486E444575737841724C7A4B43334D4A534C73694579377372744550617A4544613479505067334A4A";
+    const didDocument = "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516D5941766D6464456F4D3771357762427263513236747134734537717168704E463836715431544B6573704171";
     
     // Convert the hexadecimal URL back to a string
     const url = Buffer.from(hexUrl, "hex").toString("utf8");
@@ -73,6 +77,25 @@ export default function PetDetails() {
       })
       .catch((error) => console.error(error));
   }, []); // Removed dependency array to avoid re-fetching due to hexUrl not being a state or prop
+
+  const QRCode = dynamic(() => import("qrcode.react"), { ssr: false });
+  const qrData = {
+    owner: data?.Owner,
+    name: data?.Name,
+    species: data?.Species,
+    breed: data?.Breed,
+    sex: data?.Sex,
+    Origin: data?.Origin,
+    Birthdate: data?.Birthdate,
+    Coat: data?.Coat,
+    EyesColor: data?.EyesColor,
+    Microchip: data?.Microchip,
+    PedigreeNumber: data?.PedigreeNumber,
+    IdIssueDate: data?.IdIssueDate,
+    id: didData?.id,
+    controller: didData?.controller,
+
+}
 
   return (
     <section className="bg-[15,16,46] flex flex-col items-center mt-4 min-h-screen w-full pt-16 border-t border-blue-900">
@@ -100,7 +123,7 @@ export default function PetDetails() {
                 className="hidden mt-2 items-center md:block p-2 border-2 border-blue-300 rounded-lg bg-white cursor-pointer"
                 onClick={toggleModal}
               >
-                <QRCode value="" size={130} fgColor="#0000FF" />
+                <QRCode value={JSON.stringify(qrData)} size={130} fgColor="#0000FF" />
               </div>
                 </div>
                 <div className="ml-0 sm:ml-6 flex-grow mt-4 sm:mt-0">
@@ -178,7 +201,7 @@ export default function PetDetails() {
                       Document number:{" "}
                     </span>
                     <p className="text-black md:-mt-2">
-                    {didData?.id}
+                    {didData?.controller}
                     </p>
                   </h5>
                 </div>
@@ -189,7 +212,7 @@ export default function PetDetails() {
                 className="absolute hidden md:block top-6 right-6 p-2 border-2 border-blue-300 rounded-lg bg-white cursor-pointer"
                 onClick={toggleModal}
               >
-                <QRCode value="" size={100} fgColor="#0000FF" />
+                <QRCode value={JSON.stringify(qrData)} size={100} fgColor="#0000FF" />
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">
                 Pet Identity Passport verso
@@ -198,21 +221,21 @@ export default function PetDetails() {
                 <div className="md:flex-initial md:justify-start mx-auto"></div>
                 <div className="ml-0 sm:ml-6 flex-grow mt-4 sm:mt-0">
                   <h5 className="text-lg font-bold tracking-tight text-gray-900">
-                    <span className="text-xs text-gray-900">Id: </span>
+                    <span className="text-xs text-gray-900">Issuer Did: </span>
                     <p className="-mt-2">
-                      did:xrpl:1:rBvPGAgiBQWeFz8MwXmXi3TLqptUf9ViFe
+                    {didData?.id}
                     </p>
                   </h5>
                   <h5 className="text-sm sm:text-lg font-bold tracking-tight text-gray-900">
-                    <span className="text-xs text-gray-700">Controller: </span>
+                    <span className="text-xs text-gray-700">Controller Did: </span>
                     <p className="text-gray-700 md:-mt-2">
-                      did:xrpl:1:rBvPGAgiBQWeFz8MwXmXi3TLqptUf9ViFe
+                    {didData?.controller}
                     </p>
                   </h5>
                   <div className="grid grid-cols-2 sm:grid-cols-3">
                     <h5 className="text-lg font-bold tracking-tight text-gray-900 mt-2">
-                      <span className="text-xs text-gray-900">Address: </span>
-                      <p className="-mt-2">10 rue du Dr R, 75000 Paris</p>
+                      <span className="text-xs text-gray-900">Issuer Address: </span>
+                      <p className="-mt-2">75000 Paris</p>
                     </h5>
                     <h5 className="text-lg font-bold tracking-tight text-gray-900 mt-2">
                       <span className="text-xs text-gray-900">Issuer: </span>
@@ -221,33 +244,20 @@ export default function PetDetails() {
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 mt-2">
                     <div className="text-lg font-bold tracking-tight text-gray-900">
-                      <span className="text-xs text-gray-700">Sex: </span>
-                      <p className="text-gray-700 -mt-2">{data?.Sex}</p>
+                      <span className="text-xs text-gray-700">Pet Owner: </span>
+                      <p className="text-gray-700 -mt-2">{data?.Owner}</p>
                     </div>
                     <div className="text-lg font-bold tracking-tight text-gray-900">
                       <span className="text-xs text-gray-700">Origin: </span>
                       <p className="text-gray-700 -mt-2">
-                        {data?.Origin} France
+                        {data?.Origin}
                       </p>
                     </div>
-                    <div className="text-lg font-bold tracking-tight text-gray-900">
-                      <span className="text-xs text-gray-700">Birthdate: </span>
-                      <p className="text-gray-700 -mt-2">{data?.Birthdate}</p>
-                    </div>
+                   
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 mt-1">
-                    <h5 className="text-lg font-bold tracking-tight text-gray-900">
-                      <span className="text-xs text-gray-700">
-                        Pedigree number:{" "}
-                      </span>
-                      <p className="text-gray-700 -mt-2">
-                        {data?.PedigreeNumber}
-                      </p>
-                    </h5>
-                    <h5 className="text-lg font-bold tracking-tight text-gray-900">
-                      <span className="text-xs text-gray-700">Coat: </span>
-                      <p className="text-gray-700 -mt-2">{data?.Coat}</p>
-                    </h5>
+                    
+                    
                     <h5 className="text-lg font-bold tracking-tight text-gray-900">
                       <span className="text-xs text-gray-700">
                         Issue Date:{" "}
@@ -263,6 +273,10 @@ export default function PetDetails() {
                       EDCF22D7540A07F07D7D006AC738A7544CABF669B24099E5B31E9BE6FBC631016B
                     </p>
                   </h5>
+                  <div className="text-lg font-bold tracking-tight text-gray-900">
+                      <span className="text-xs text-gray-700">@context: </span>
+                      <p className="text-gray-700 -mt-2">https://www.w3.org/ns/did/v1</p>
+                    </div>
                 </div>
               </div>
             </div>
