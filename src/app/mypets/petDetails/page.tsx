@@ -22,14 +22,17 @@ interface DataType {
   Origin: string;
   Birthdate: Date;
   Coat: string;
-  EyeColor: string;
+  EyesColor: string;
+  Microchip: string;
   PedigreeNumber: string;
-  IssueDate: Date;
+  IdIssueDate: Date;
+  id: string;
 }
 
 export default function PetDetails() {
   const [data, setData] = useState<DataType | null>(null);
   const [hexUrl, setHexUrl] = useState("");
+  const [didData, setDidData] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -45,25 +48,31 @@ export default function PetDetails() {
   }, []);
 
   useEffect(() => {
-    const hexUrl =
-      "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516d5834374643455976644438666767714161664A504B79464E64713831546A3651576F415A3767325564623834";
-
+    const hexUrl = "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516D5A457A353145697265654B35426E3155557978737A3438575946544B5648633969424D4E6F43583133314C36";
+    const didDocument = "68747470733A2F2F676174657761792E70696E6174612E636C6F75642F697066732F516D50546D76433234594676687752326F474E7337755845446E6E4374723932353854654C5466576D6432385965";
+    
     // Convert the hexadecimal URL back to a string
     const url = Buffer.from(hexUrl, "hex").toString("utf8");
-
+    const didUrl = Buffer.from(didDocument, "hex").toString("utf8");
+  
     // Fetch the data from the URL
     fetch(url)
-      .then((response: Response) => response.json())
-      .then((data: any) => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
         setData(data);
       })
-      .catch((error: any) => console.error(error));
-  }, [hexUrl]);
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
+      .catch((error) => console.error(error));
+  
+    // Fetch the DID document
+    fetch(didUrl)
+      .then((response) => response.json())
+      .then((didData) => {
+        console.log(didData);
+        setDidData(didData); // Assuming you have a state setter named setDidData
+      })
+      .catch((error) => console.error(error));
+  }, []); // Removed dependency array to avoid re-fetching due to hexUrl not being a state or prop
 
   return (
     <section className="bg-[15,16,46] flex flex-col items-center mt-4 min-h-screen w-full pt-16 border-t border-blue-900">
@@ -117,7 +126,7 @@ export default function PetDetails() {
                     <div className="text-lg font-bold tracking-tight text-gray-900">
                       <span className="text-xs text-gray-700">Origin: </span>
                       <p className="text-black -mt-2">
-                        {data?.Origin} France
+                        {data?.Origin}
                       </p>
                     </div>
                     <div className="text-lg font-bold tracking-tight text-gray-900 z-10">
@@ -133,7 +142,7 @@ export default function PetDetails() {
                     </h5>
                     <h5 className="text-lg font-bold tracking-tight text-gray-900">
                       <span className="text-xs text-gray-700">Eyes color: </span>
-                      <p className="text-black -mt-2">{data?.EyeColor}Brown</p>
+                      <p className="text-black -mt-2">{data?.EyesColor}</p>
                     </h5>
                     <h5 className="text-lg font-bold tracking-tight text-gray-900 z-10">
                       <span className="text-xs text-gray-700">
@@ -150,7 +159,7 @@ export default function PetDetails() {
                       Microchip number:{" "}
                     </span>
                     <p className="text-black md:-mt-2 whitespace-nowrap">
-                      2500269604711389 FRA
+                    {data?.Microchip}
                     </p>
                   </h5>
                   <div className="col-span-1"></div>
@@ -169,7 +178,7 @@ export default function PetDetails() {
                       Document number:{" "}
                     </span>
                     <p className="text-black md:-mt-2">
-                      did:xrpl:1:rBvPGAgiBQWeFz8MwXmXi3TLqptUf9ViFe
+                    {didData?.id}
                     </p>
                   </h5>
                 </div>
@@ -244,7 +253,7 @@ export default function PetDetails() {
                         Issue Date:{" "}
                       </span>
                       <p className="text-gray-700 -mt-2">
-                        {new Date().toLocaleDateString()}
+                      {data?.IdIssueDate}
                       </p>
                     </h5>
                   </div>

@@ -107,6 +107,7 @@ export default function AddNewPet() {
       Microchip: petMicrochip,
       PedigreeNumber: petPedigreeNumber,
       IdIssueDate: PetIdIssueDate,
+      
     };
 
     console.log(chalk.green("Sending PetData: ", JSON.stringify(petData)));

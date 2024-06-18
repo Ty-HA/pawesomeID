@@ -52,17 +52,19 @@ async function main() {
     const issuerPrivateKeyForAssertion = '0041A2F8C0D2CAFC0E2DDC6BD490F047B091FD6F2BEFA942E59C8AFEED91235667';
 
     const petProfile = {
-        Name: "Wiwi",
-        Species: "Dog",
-        Breed: "Chihuahua",
-        Sex: "M",
-        Birthdate: "2023-01-01",
-        Origin: "FR",
-        Coat: "black and tan",
-        EyesColor: "brown",
-        PedigreeNumber: "44544444",
-        IdIssueDate: "2024-06-05",
-    };
+        "Owner": "Ty",
+        "Name": "Bunny",
+        "Species": "Dog",
+        "Breed": "Finnish Lapphund",
+        "Sex": "F",
+        "Birthdate": "2012-06-07",
+        "Origin": "FRA",
+        "Coat": "Grey Domino",
+        "EyesColor": "Brown",
+        "Microchip": "2500269604711389FRA",
+        "PedigreeNumber": "4564894615",
+        "IdIssueDate": "2024-06-13"
+      }
 
     const vc = await createAndSignVC(issuerDID, userDID, issuerPrivateKeyForAssertion, petProfile);
     console.log(JSON.stringify(vc, null, 2));
