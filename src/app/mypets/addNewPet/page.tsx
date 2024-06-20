@@ -2,6 +2,7 @@
 const chalk = require("chalk");
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { Button, Modal, Label, TextInput } from "flowbite-react";
 
@@ -107,7 +108,6 @@ export default function AddNewPet() {
       Microchip: petMicrochip,
       PedigreeNumber: petPedigreeNumber,
       IdIssueDate: PetIdIssueDate,
-      
     };
 
     console.log(chalk.green("Sending PetData: ", JSON.stringify(petData)));
@@ -207,7 +207,11 @@ export default function AddNewPet() {
               </div>
               <div className="flex flex-col items-start mb-4 ">
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="species" value="Species" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="species"
+                    value="Species"
+                  />
                 </div>
 
                 <button
@@ -271,10 +275,13 @@ export default function AddNewPet() {
                 />
               </div>
 
-              
               <div className="mb-4">
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="birthday" value="Birthday" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="birthday"
+                    value="Birthday"
+                  />
                 </div>
                 <div className="relative max-w-sm">
                   <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -343,7 +350,11 @@ export default function AddNewPet() {
             <section id="addPets" className="flex flex-col items-center w-full">
               <div className="mb-4">
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="origin" value="Origin" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="origin"
+                    value="Origin"
+                  />
                 </div>
                 <TextInput
                   id="origin"
@@ -355,7 +366,7 @@ export default function AddNewPet() {
               </div>
               <div className="mb-4">
                 <div className="mb-1 block">
-                  <Label className="font-bold"  htmlFor="coat" value="Coat" />
+                  <Label className="font-bold" htmlFor="coat" value="Coat" />
                 </div>
                 <TextInput
                   id="coat"
@@ -367,7 +378,11 @@ export default function AddNewPet() {
               </div>
               <div className="mb-4">
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="eyescolor" value="Eyes color" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="eyescolor"
+                    value="Eyes color"
+                  />
                 </div>
                 <TextInput
                   id="eyescolor"
@@ -379,7 +394,11 @@ export default function AddNewPet() {
               </div>
               <div className="mb-4">
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="microchip" value="Microchip Number" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="microchip"
+                    value="Microchip Number"
+                  />
                 </div>
                 <TextInput
                   id="microchip"
@@ -391,7 +410,11 @@ export default function AddNewPet() {
               </div>
               <div className="mb-4">
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="pedigreeNumber" value="Pedigree Number" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="pedigreeNumber"
+                    value="Pedigree Number"
+                  />
                 </div>
                 <TextInput
                   id="pedigreeNumber"
@@ -403,7 +426,11 @@ export default function AddNewPet() {
               </div>
               <div>
                 <div className="mb-1 block">
-                  <Label className="font-bold" htmlFor="IdIssueDate" value="Issue Date" />
+                  <Label
+                    className="font-bold"
+                    htmlFor="IdIssueDate"
+                    value="Issue Date"
+                  />
                 </div>
                 <TextInput
                   id="IdIssueDate"

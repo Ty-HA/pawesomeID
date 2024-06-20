@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import {Button} from "flowbite-react";
 import Link from 'next/link';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { topupXRP, transferXRP } from '@/lib/actions/xrpl-wallet';
@@ -47,6 +48,7 @@ const HomeClientPage: React.FC<HomeClientPageProps> = ({
     };
     fetchData();
   }, []);
+
   const sendTransaction = async (event: FormData) => {
     setTransactionHash(undefined);
     const receiverAddress = event.get('receiverAddress')?.toString();
@@ -76,7 +78,7 @@ const HomeClientPage: React.FC<HomeClientPageProps> = ({
         userEmail={googleDetails?.email} // Pass Google user email
         userImage={googleDetails?.picture} // Pass Google user profile picture
       />
-      <button
+      {/*<button
         className="w-fit flex flex-row justify-center items-center min-w-[150px] bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-[12px] text-white mt-[20px]"
         type="button"
         disabled={isToppingUp}
@@ -152,10 +154,36 @@ const HomeClientPage: React.FC<HomeClientPageProps> = ({
             </Link>
           </>
         )}
-      </form>
-      <h2 className="text-3xl font-bold text-center mt-auto mb-auto">
-        Kaiju Wallet
-      </h2>
+      </form>*/}
+      <div className="mt-8">
+  <h2 className="text-3xl font-bold text-center">
+    Your dashboard
+  </h2>
+  <div className="mt-4">
+    <table className="w-full text-left border-collapse">
+      <thead>
+        <tr>
+          <th className="p-4 border-b">Pet Name</th>
+          <th className="p-4 border-b">DID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {/* Exemple de données simulées */}
+        {[
+          { name: "Buddy", did: "did:example:123" },
+          { name: "Molly", did: "did:example:456" },
+          { name: "Charlie", did: "did:example:789" },
+        ].map((pet) => (
+          <tr key={pet.did}>
+            <td className="p-4 border-b">{pet.name}</td>
+            <td className="p-4 border-b">{pet.did}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+<Button href="/mypets/addNewPet" className="bg-yellow-400 mt-24">Add a new pet</Button>
     </main>
   );
 };

@@ -18,7 +18,7 @@ const TopBar: React.FC<TopBarProps> = ({ address, spendableBalance, totalReserve
   };
 
   return (
-    <div className="w-full p-[24px] flex flex-col sm:flex-row justify-end gap-[8px] bg-blue-950">
+    <div className="w-full p-[24px] flex flex-col sm:flex-row justify-end gap-[50px]">
       <div className="flex mr-auto gap-[8px]">
         <img src={userImage} alt="Profile" className="w-[40px] h-[40px] rounded-full"/>
         <div className="flex flex-col mr-auto ">
@@ -26,12 +26,12 @@ const TopBar: React.FC<TopBarProps> = ({ address, spendableBalance, totalReserve
           <h3 className="text-[13px]  text-white">{userEmail}</h3>
         </div>
       </div>
-     <h3 className="flex items-center justify-center bg-yellow-600 px-4 rounded-full text-white gap-2 h-10">
+     {/*<h3 className="flex items-center justify-center bg-yellow-600 px-4 rounded-full text-white gap-2 h-10">
         <div>{spendableBalance}</div> 
         <div>({totalReserve} reserved) XRP</div>
-      </h3>
+      </h3>*/}
 
-      <h3 className="bg-blue-400 px-4 py-2 rounded-full text-white text-right hidden sm:inline-block items-center justify-end h-10" >
+      <h3 className="bg-blue-400 px-4 py-2 rounded-md text-white text-right hidden sm:inline-block items-center justify-end h-10" >
       <FaCopy className="mr-2 sm:inline-block cursor-pointer" onClick={copyToClipboard} />
         {address}
       </h3>
@@ -40,7 +40,7 @@ const TopBar: React.FC<TopBarProps> = ({ address, spendableBalance, totalReserve
         <FaCopy className="cursor-pointer" onClick={copyToClipboard} style={{ marginTop: '-20px' }}  />
       </h3>
       <button
-        className="bg-red-400 hover:bg-red-500 px-4 py-2 rounded-[12px] text-white h-10"
+        className="bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white h-10"
         onClick={() => removeSession()}
       >
         Logout
