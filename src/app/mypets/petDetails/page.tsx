@@ -98,7 +98,7 @@ export default function PetDetails() {
 }
 
   return (
-    <section className="bg-[15,16,46] flex flex-col items-center mt-4 min-h-screen w-full pt-16 border-t border-blue-900">
+    <section className="bg-[15,16,46] flex flex-col items-center mt-4 min-h-screen w-full pt-16">
       <div className="flex flex-col items-center">
         <div className="flip-card bg-white rounded-3xl shadow-md w-full max-w-3xl relative z-10">
           <div className="flip-card-inner rounded-3xl z-10">

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useTransition } from 'react';
-import {Button} from "flowbite-react";
-import Link from 'next/link';
-import PulseLoader from 'react-spinners/PulseLoader';
-import { topupXRP, transferXRP } from '@/lib/actions/xrpl-wallet';
-import { User } from '@/types/user';
-import TopBar from '@/components/top-bar';
-import { getSession } from '@/lib/actions/auth';
-import { Session } from '../../types/session';
+import { useEffect, useState, useTransition } from "react";
+import { Button } from "flowbite-react";
+import Link from "next/link";
+import PulseLoader from "react-spinners/PulseLoader";
+import { topupXRP, transferXRP } from "@/lib/actions/xrpl-wallet";
+import { User } from "@/types/user";
+import TopBar from "@/components/top-bar";
+import { getSession } from "@/lib/actions/auth";
+import { Session } from "../../types/session";
 
 type HomeClientPageProps = {
   user: User;
@@ -51,15 +51,15 @@ const HomeClientPage: React.FC<HomeClientPageProps> = ({
 
   const sendTransaction = async (event: FormData) => {
     setTransactionHash(undefined);
-    const receiverAddress = event.get('receiverAddress')?.toString();
-    const amount = event.get('amount')?.toString();
+    const receiverAddress = event.get("receiverAddress")?.toString();
+    const amount = event.get("amount")?.toString();
 
     if (!receiverAddress || !amount) return;
 
     const result = await transferXRP(
       user.blockchains.xrpl.walletAddress,
       receiverAddress,
-      Number(amount),
+      Number(amount)
     );
 
     if (result.error) alert(result.error);
@@ -156,41 +156,51 @@ const HomeClientPage: React.FC<HomeClientPageProps> = ({
         )}
       </form>*/}
       <div className="mt-8">
-  <h2 className="text-3xl font-bold text-center">
-    Your dashboard
-  </h2>
-  <div className="mt-4">
-    <table className="w-full text-left border-collapse">
-      <thead>
-        <tr>
-          <th className="p-4 border-b">Pet Name</th>
-          <th className="p-4 border-b">DID</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Exemple de données simulées */}
-        {[
-          { name: "Buddy", did: "did:example:123" },
-          { name: "Molly", did: "did:example:456" },
-          { name: "Charlie", did: "did:example:789" },
-        ].map((pet) => (
-          <tr key={pet.did}>
-            <td className="p-4 border-b">{pet.name}</td>
-            <td className="p-4 border-b">{pet.did}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
-<Button href="/mypets/addNewPet" className="bg-yellow-400 mt-24">Add a new pet</Button>
+        <h2 className="text-3xl font-bold text-center">Your dashboard</h2>
+        <div className="mt-4">
+          <table className="w-full text-left border-collapse shadow-lg border-2 border-gray-300">
+            <thead className="bg-blue-900">
+              <tr>
+                <th className="p-4 border-b-2  border-gray-300 border-r-2">Pet Name</th>              
+                <th className="p-4 border-b-2 border-gray-300 border-r-2">DID</th>
+                <th className="p-4 border-b-2  border-gray-300 border-r-2">Specie</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Exemple de données simulées */}
+              {[
+                {
+                  name: "Bunny",
+                  did: "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ-1",
+                  specie: "Dog",
+                },
+                {
+                  name: "Widget",
+                  did: "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ-2",
+                  specie: "Dog",
+                },
+                { name: "Charlie", did: "did:example:789", specie: "Cat"},
+              ].map((pet) => (
+                <tr key={pet.did} className="hover:bg-gray-50">
+                  <td className="p-4 border-b border-r-2">{pet.name}</td>
+                  <td className="p-4 border-b border-r-2">{pet.did}</td>
+                  <td className="p-4 border-b border-r-2">{pet.specie}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <Button href="/mypets/addNewPet" className="bg-yellow-400 mt-24">
+        Add a new pet
+      </Button>
     </main>
   );
 };
 
 export default HomeClientPage;
 function setUserData(
-  session: import('../../types/session').Session | null | undefined,
+  session: import("../../types/session").Session | null | undefined
 ) {
-  throw new Error('Function not implemented.');
+  throw new Error("Function not implemented.");
 }
