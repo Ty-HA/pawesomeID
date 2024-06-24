@@ -198,7 +198,7 @@ export default function AddNewPet() {
                 </div>
                 <TextInput
                   id="name"
-                  placeholder="Name"
+                  placeholder="Pet Name"
                   required
                   color="gray"
                   autoComplete="name"

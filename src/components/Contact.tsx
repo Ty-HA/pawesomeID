@@ -4,6 +4,28 @@ import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
 
 export default function Contact() {
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        body: JSON.stringify({
+            access_key: "YOUR_ACCESS_KEY_HERE",
+            name: e.target.name.value,
+            email: e.target.email.value,
+            message: e.target.message.value,
+        }),
+    });
+    const result = await response.json();
+    if (result.success) {
+        console.log(result);
+    }
+}
+
   return (
     <section
       id="contact"
@@ -15,57 +37,24 @@ export default function Contact() {
           Stay tuned!
           </h2>
           <p className="mt-4 lg:mb-8 text-center text-base text-white dark:text-white sm:text-xl">
-            Do not hesitate to contact us for any question
+          Enter your email if you want to be informed about our launch.
           </p>
         </div>
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit}>
           <div>
-            <Label
-              htmlFor="email4"
-              className="block mb-2 text-md text-green dark:text-green text-left"
-            >
-              Your email
-            </Label>
-            <TextInput
-              id="email4"
-              type="email"
-              icon={HiMail}
-              placeholder="Email"
-              required
-            />
+              <Label htmlFor="name">Name</Label>
+              <TextInput type="text" name="name" required placeholder="Your name" />
           </div>
           <div>
-            <Label
-              htmlFor="subject"
-              className="block mb-2 text-md text-green dark:text-green text-left"
-            >
-              Subject
-            </Label>
-            <TextInput
-              id="subject"
-              placeholder="Subject"
-              required
-              color="gray"
-            />
+              <Label htmlFor="email">Email</Label>
+              <TextInput type="email" name="email" required placeholder="email@example.com" />
           </div>
-          <div className="sm:col-span-2">
-            <Label
-              htmlFor="message"
-              className="block mb-2 text-md text-green dark:text-green text-left"
-            >
-              Your message
-            </Label>
-            <Textarea
-              id="message"
-              placeholder="Your message..."
-              required
-              rows={8}
-            />
+          <div>
+              <Label htmlFor="message">Message</Label>
+              <Textarea name="message" required rows="3" placeholder="Enter Message"></Textarea>
           </div>
-          <Button className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white sm:px-12 px-4 mt-8 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap" type="submit">
-            Send message
-          </Button>
-        </form>
+          <Button className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white sm:px-12 px-4 mt-8 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap" type="submit">Submit Form</Button>
+      </form>
       </div>
     </section>
   );
