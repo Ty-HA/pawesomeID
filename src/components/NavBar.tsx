@@ -11,7 +11,7 @@ import Web3AuthLogin from "./web3auth/Web3AuthLogin";
 export default function NavBar() {
   return (
     <>
-      <Navbar fluid rounded className="top-0 w-full py-4 z-50 bg-[15,16,46] border-b border-blue-900">
+      <Navbar fluid rounded className="w-[100vw] top-0 py-4 z-50 bg-[15,16,46] border-b border-blue-900">
         <Navbar.Brand href="/">
           <Image
             src="/logo_full.png"
