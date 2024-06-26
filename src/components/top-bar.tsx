@@ -1,5 +1,6 @@
 import { removeSession } from '@/lib/actions/auth';
 import { FaCopy } from 'react-icons/fa'; 
+import Image from 'next/image';
 
 
 type TopBarProps = {
@@ -20,7 +21,7 @@ const TopBar: React.FC<TopBarProps> = ({ address, spendableBalance, totalReserve
   return (
     <div className="w-full p-[24px] flex flex-col sm:flex-row justify-end gap-[50px]">
       <div className="flex mr-auto gap-[8px]">
-        <img src={userImage} alt="Profile" className="w-[40px] h-[40px] rounded-full"/>
+        <Image src={userImage} alt="Profile" className="w-[40px] h-[40px] rounded-full" width="300" height="300" />
         <div className="flex flex-col mr-auto ">
           <h3 className="text-[15px] font-bold text-white ">{userName}</h3>
           <h3 className="text-[13px]  text-white">{userEmail}</h3>

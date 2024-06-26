@@ -5,6 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import Link from 'next/link'; 
+import Image from 'next/image';
 
 const KaijuLoginPage: React.FC = () => {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
@@ -41,7 +42,7 @@ const KaijuLoginPage: React.FC = () => {
 
   return (
     <section className="flex sm:flex-row-reverse flex-col items-center w-full bg-white pb-8">
-      <img src="/image/get-started.png" alt="get started" className="w-1/2 mt-8 sm:mr-16 lg:mr-60 mx-8" />
+      <Image src="/image/get-started.png" alt="get started" className="w-1/2 mt-8 sm:mr-16 lg:mr-60 mx-8" width="300" height="300" />
       <div className="flex flex-col sm:w-1/2 xl:ml-60 lg:mr-32 px-8 items-center">
         <h1 className="mt-16 text-3xl font-semibold text-blue-900 mb-4">Get Started</h1>
         <p className="md:text-xl sm:text-left text-center text-gray-600 mb-8">Create a new Pawesome ID or connect a wallet</p>

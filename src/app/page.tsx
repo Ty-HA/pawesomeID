@@ -73,7 +73,7 @@ const App = () => {
             What is DiD?
           </h1>
           <p className="text-white xl:text-xl lg:text-2xl text-m whitespace-normal my-4">
-            DiD is like a digital ID card that isn't controlled by any single
+            DiD is like a digital ID card that isn&apos;t controlled by any single
             company or government. It lets you prove who you are online without
             needing a central authority to verify it.
           </p>
