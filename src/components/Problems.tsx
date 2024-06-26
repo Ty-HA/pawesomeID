@@ -38,7 +38,7 @@ const explication = (
           }`}
         >
           <h1
-            className="bg-white text-red-700 font-bold xl:text-5xl lg:text-3xl text-2xl whitespace-normal
+            className="bg-white text-red-700 font-bold xl:text-5xl lg:text-3xl text-2xl whitespace-normal mt-6
           "
           >
             {title}

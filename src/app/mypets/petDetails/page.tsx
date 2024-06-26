@@ -162,9 +162,7 @@ export default function PetDetails() {
                     </div>
                     <div className="text-lg font-bold tracking-tight text-gray-900 z-10">
                       <span className="text-xs text-gray-700">Birthdate: </span>
-                      <p className="text-black -mt-2">{data?.Birthdate
-                          ? new Date(data.Birthdate).toLocaleDateString()
-                          : "Birthdate not available"}</p>
+                      <p className="text-black -mt-2">{data?.Birthdate ? data.Birthdate.toLocaleDateString() : 'No birthdate provided'}</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-3 sm:grid-cols-3 mt-1">
