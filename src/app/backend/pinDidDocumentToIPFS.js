@@ -3,17 +3,21 @@ const chalk = require('chalk');
 
 const FormData = require("form-data");
 
-const JWT =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwZjE1MTkzYS1kMzRkLTQxYWMtYjMxMy01NzcyYWIyZjVlNjUiLCJlbWFpbCI6ImJpY2h0eS5oYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMWExZjJhZWVjZWE4ODdlNTk4NDQiLCJzY29wZWRLZXlTZWNyZXQiOiI1N2E4MGQyMzUxNDQ1ZjNmYWY3ZmMzYzM1NWZlNTU0M2JiYjUxYWEzNGQyZjdmNzQ1YzZhYTEzNTU4NDlmZTNjIiwiaWF0IjoxNzE3MDg3MTMzfQ.i8Ofn3R7nm2xyJrODuyDJu-xz3h7b_t4EfEUvCBBoH0";
+const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwZjE1MTkzYS1kMzRkLTQxYWMtYjMxMy01NzcyYWIyZjVlNjUiLCJlbWFpbCI6ImJpY2h0eS5oYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMWExZjJhZWVjZWE4ODdlNTk4NDQiLCJzY29wZWRLZXlTZWNyZXQiOiI1N2E4MGQyMzUxNDQ1ZjNmYWY3ZmMzYzM1NWZlNTU0M2JiYjUxYWEzNGQyZjdmNzQ1YzZhYTEzNTU4NDlmZTNjIiwiaWF0IjoxNzE3MDg3MTMzfQ.i8Ofn3R7nm2xyJrODuyDJu-xz3h7b_t4EfEUvCBBoH0";
 
-  const did= `did:xrpl:1:rBvPGAgiBQWeFz8MwXmXi3TLqptUf9ViFe`;
-  const uri = 'https://gateway.pinata.cloud/ipfs/QmXGespe6ikmFMDVcwwqTU8R12QUEFJ7kdM9AZooF38H63';
-  const PK = 'EDCF22D7540A07F07D7D006AC738A7544CABF669B24099E5B31E9BE6FBC631016B'
+  const did= `did:xrpl:1:r9UVfG5LnWNMaCyHLWBHhrT37jUiuQ2azE`;
+  // endpoint with PetProfile
+  const uri = 'https://gateway.pinata.cloud/ipfs/QmZSr6uRdYx7GtWNUACqTiRcF2n4rVCN8zoJNiEcvQ6vSU';
+  const PK = 'EDC6CAF48E5A0F55B124136E4ABF723F965C50B6E5DCB5B47E44FD2230F6971562'
+
+  const userDid = `did:xrpl:1:rDm3i9buZ76gZe8oPmGDzn7x4UUfyhYn3h`;
+
+  // The vet conrols the DID, id and controller = IssuerDID
   
   const didDocument = {
     "@context": "https://www.w3.org/ns/did/v1",
     id: did,
-    controller: did,
+    controller: userDid,
     verificationMethod: [
       {
         id: `${did}#keys-1`,

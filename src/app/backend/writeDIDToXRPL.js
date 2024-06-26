@@ -98,7 +98,7 @@ async function setDID(wallet, petDataHash, uri) {
   */
   // TO DO: put DIDDoc on IPFS
 
-  const didDocument = `https://gateway.pinata.cloud/ipfs/QmPSs8ZbJWYgUq9FNbfV1cX4oZuqtaSkQrZFFwf5TSuJeH`;
+  const didDocument = `https://gateway.pinata.cloud/ipfs/QmYAvmddEoM7q5wbBrcQ26tq4sE7qqhpNF86qT1TKespAq`;
   const didDocumentHexUrl= Buffer.from(didDocument).toString("hex");
   
 
@@ -132,12 +132,7 @@ async function setDID(wallet, petDataHash, uri) {
 // Main function for wallet creation and DID setting on the XRP Ledger
 async function writeDIDToXRPL(petData, uri) {
   try {
-    // issuer Xaman old
-    const issuerSecret = "sEdVNQpbEszgeoRPe4o1pvnvqVqvGBf";
-    
-    // Issuer Metamask test
-    // const issuerSecret = "a4c7d42bb3e78b9ba1183327f4af41fae35b16d4aea3d014aa4a64fabcbbc159";
-
+    const issuerSecret = "sEd7zMpi74XGJzs2Emb59XkhPukoHPp";
     let issuerWallet = await generateWalletFromSecret(issuerSecret);
     // console.log('Issuer wallet:', issuerWallet);
 
@@ -148,9 +143,7 @@ async function writeDIDToXRPL(petData, uri) {
     const issuerResult = await setDID(issuerWallet, issuerPetPetDataHash, uri);
     // console.log(chalk.blue(`Issuer Transaction result: ${JSON.stringify(issuerResult, null, 2)}`));
 
-    // OLD
-    const userSecret = "sEdToEk5mVUqxTq7bS5zbBK7PXLDbsp";
-    // const userSecret = "a4c7d42bb3e78b9ba1183327f4af41fae35b16d4aea3d014aa4a64fabcbbc159";
+    const userSecret = "sEdSCyD96eVH9nK7jMAGkdTvx8AVgBD";
     let userWallet = await generateWalletFromSecret(userSecret);
     //let userDIDIpfsHash = "dffafde488960b37a54f648889e2aa4d493a609f4a078cc96780a53da3811793";
 
