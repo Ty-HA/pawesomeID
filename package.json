@@ -42,6 +42,7 @@
     "flowbite-react": "^0.9.0",
     "fs": "^0.0.1-security",
     "google-auth-library": "^9.10.0",
+    "helia": "^4.2.4",
     "ipfs-core": "^0.18.1",
     "ipfs-http-client": "^60.0.1",
     "iron-session": "^8.0.1",
@@ -63,6 +64,7 @@
     "utf-8-validate": "^5.0.10",
     "viem": "^2.9.23",
     "web3": "^4.8.0",
+    "webpack": "^5.92.1",
     "xrpl": "^3.0.0",
     "xumm": "^1.7.7"
   },
