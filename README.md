@@ -2,7 +2,7 @@
 
 ## Overview
 
-Pet Passport is an innovative decentralized application (DApp) that creates a blockchain-based digital identity for pets. Leveraging the XRPL blockchain and Decentralized Identifiers (DIDs), this project aims to elevate the status of animals in our society by providing them with a secure, transparent, and self-sovereign identity.
+PawesomeID is an innovative decentralized application (DApp) that creates a blockchain-based digital identity for pets. Leveraging the XRPL blockchain and Decentralized Identifiers (DIDs), this project aims to elevate the status of animals in our society by providing them with a secure, transparent, and self-sovereign identity.
 
 This project started during the XRPL Residency in Paris.
 
@@ -85,7 +85,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Contact
 
-Do not hesitate to contact 
+Do not hesitate to contact us
 
 ---
 
