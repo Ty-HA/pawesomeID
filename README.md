@@ -65,6 +65,10 @@ This project started during the XRPL Aquarium program Residency in Paris (april 
    - Each pet receives a digital ID card containing a QR code.
    - The QR code can be scanned using a mobile app (in development) to verify the pet's identity.
 
+## DEMO VIDEO
+
+https://www.youtube.com/watch?v=YU_JEHt5Jpw
+
 ## Future Developments
 
 - Finalization of dynamic DID Document generation
