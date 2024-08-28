@@ -38,6 +38,29 @@ This project started during the XRPL Aquarium program Residency in Paris (april 
   
   ![Pet DID Creation](public/images/didset300524.png)
 
+  ```
+  {
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ",
+  "controller": "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ",
+  "verificationMethod": [
+    {
+      "id": "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ#keys-1",
+      "type": "EcdsaSecp256k1RecoveryMethod2020",
+      "controller": "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ",
+      "publicKeyHex": "0307248CE83C5301FAE84428730FA46A97F10F75784F633BBCD912C60973D7F2DA"
+    }
+  ],
+  "service": [
+    {
+      "id": "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ#profile",
+      "type": "Public Profile",
+      "serviceEndpoint": "https://gateway.pinata.cloud/ipfs/Qmf9o4oDRTnA2AoNxLsYtXPRXNU3TxwhzpbZH5HWbdjLZa"
+    }
+  ]
+}
+```
+
 3. **Pet ID Card**:
    - Each pet receives a digital ID card containing a QR code.
    - The QR code can be scanned using a mobile app (in development) to verify the pet's identity.
