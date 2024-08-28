@@ -1,12 +1,15 @@
 # PawesomeID, your Pet Passport DApp
 
 ## Overview
+#### PROJECT IN PROGRESS
 
 PawesomeID is an innovative decentralized application (DApp) that creates a blockchain-based digital identity for pets. Leveraging the XRPL blockchain and Decentralized Identifiers (DIDs), this project aims to elevate the status of animals in our society by providing them with a secure, transparent, and self-sovereign identity.
 
 This project started during the XRPL Aquarium program Residency in Paris (april to june 2024).
 
 🏆 Winner of the HAKS Hackathon 2024 and Demo Day Jury's Prize 🏆 
+
+
 
 ## Features
 
@@ -83,7 +86,7 @@ https://www.youtube.com/watch?v=YU_JEHt5Jpw
 2. Elevate the status of animals in society through self-sovereign identity
 3. Create a user-friendly interface for veterinarians to manage pet identities
 
-## Getting Started
+# Getting Started
 
 ## If you want to test as a veterinarian
 #### Clone this repository
@@ -91,14 +94,30 @@ Then
 ```npm install```
 and change to ```dev branch``` if you want to test to register a pet as a professional and check it on XRPL devnet.
 
-
 First, run:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Update the .env with the example
+and follow Kaiju doc: https://docs.kaiju3d.com/tutorials/xrpl/google-authentication
+
+Go to login to test kaiju Login
+```http://localhost:3000/login```
+
+Then when you can add a pet here:
+```http://localhost:3000/mypets/addNewPet```
+
+You will see the dashboard here
+```http://localhost:3000/dahsboard```
+
+![Pet DID Creation](public/images/dashboardveto.png)
+
+
+
+
+
 
 
 ## Learn More
