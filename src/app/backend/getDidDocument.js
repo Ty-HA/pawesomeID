@@ -50,7 +50,8 @@ async function getDIDDocument(did) {
 
 // Main function for fetching DID documents for given DIDs
 async function main() {
-    const issuerDID = "did:xrpl:1:rffGVvdyzRxT1KJLs6K4ZaNj5LiDJGxNvu";
+    // const issuerDID = "did:xrpl:1:rffGVvdyzRxT1KJLs6K4ZaNj5LiDJGxNvu";
+    const issuerDID = "did:xrpl:1:r9UVfG5LnWNMaCyHLWBHhrT37jUiuQ2azE";
     await getDIDDocument(issuerDID);
 
     const userDID = "did:xrpl:1:rp5vPZ49XvsqVtuWvaCSgwSbcya1HVpnaZ";

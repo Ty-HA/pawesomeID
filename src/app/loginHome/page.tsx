@@ -3,6 +3,7 @@
 import React from "react";
 
 import Web3AuthLogin from "@/components/web3auth/Web3AuthLogin";
+import KaijuLoginPage from "../login/page";
 
 const walletButton = (title: string, imgSrc: string) => {
   return (
