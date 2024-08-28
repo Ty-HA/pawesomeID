@@ -22,6 +22,7 @@ This project started during the XRPL Aquarium program Residency in Paris (april 
 - Frontend: Next.js, Tailwind CSS
 - Blockchain: XRPL (XRP Ledger)
 - Identity: Decentralized Identifiers (DIDs)
+- Pinata to Direct Link to DID Document on IPFS
 - Wallet: Kaiju (for account abstraction)
 - Web3form for the contact section
 
@@ -34,6 +35,8 @@ This project started during the XRPL Aquarium program Residency in Paris (april 
 2. **Pet DID Creation**:
    - Only authenticated veterinarians can create a DID for an animal.
    - A user-friendly form allows vets to input pet information and generate a DID.
+  
+  ![Pet DID Creation](public/images/didset300524.png)
 
 3. **Pet ID Card**:
    - Each pet receives a digital ID card containing a QR code.
@@ -42,7 +45,9 @@ This project started during the XRPL Aquarium program Residency in Paris (april 
 ## Future Developments
 
 - Finalization of dynamic DID Document generation
+- example on Pinata https://gateway.pinata.cloud/ipfs/QmXt3ACDHNofyKnfPkbDChBhMf919QeZvZrWeLwJoDFTSN
 - Integration with "heirloom" DID for veterinarian login
+- Biometric authentification
 - Mobile application for QR code scanning and verification
 
 ## Project Goals
