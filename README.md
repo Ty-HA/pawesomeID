@@ -1,43 +1,57 @@
-# PawesomeID, your Pet Passport DApp
+# PawesomeID, your Pet Passport DApp 🐾
 
-## Overview
+
+
+##  🏆 Winner of the HAKS Hackathon 2024 and XRPL-Commons Demo Day Jury's Prize 🏆 
+
+![Pet Passport](public/mobile0.png)
+
+## 🌟 Project Overview
 #### PROJECT IN PROGRESS
 
 PawesomeID is an innovative decentralized application (DApp) that creates a blockchain-based digital identity for pets. Leveraging the XRPL blockchain and Decentralized Identifiers (DIDs), this project aims to elevate the status of animals in our society by providing them with a secure, transparent, and self-sovereign identity.
 
-This project started during the XRPL Aquarium program Residency in Paris (april to june 2024).
+This project started during the XRPL-Commons Aquarium program Residency in Paris (april to june 2024).
 
-🏆 Winner of the HAKS Hackathon 2024 and Demo Day Jury's Prize 🏆 
+### The problem
+Pet identification and medical record management are often fragmented and insecure, leading to challenges in pet care, lost pets, and potential fraud.
+
+### Our solution
+PawesomeID leverages blockchain and Decentralized Identifiers (DIDs) to provide a unified, tamper-proof digital identity for every pet, accessible to owners and authorized veterinarians.
+
+Elevate the status of animals in society through self-sovereign identity
+
+## 🚀 Key Features
+
+- **Blockchain-Powered Pet Passports**: Secure, immutable pet identities on XRPL
+- **Veterinarian-Verified Identities**: Only authorized vets can create and update pet DIDs
+- **User-Friendly Interface**: Intuitive dashboard for vets and pet owners
+- **QR Code Integration**: Quick access to pet information via mobile scanning
+- **Account Abstraction**: Seamless onboarding with Kaiju wallet integration
+
+## 🛠 Technical Stack
+
+- **Frontend**: Next.js, Tailwind CSS
+- **Blockchain**: XRPL (XRP Ledger)
+- **Identity**: Decentralized Identifiers (DIDs)
+- **Data Storage**: IPFS via Pinata - example https://gateway.pinata.cloud/ipfs/QmXt3ACDHNofyKnfPkbDChBhMf919QeZvZrWeLwJoDFTSN
+- **Wallet**: Kaiju (for account abstraction)
+- **Forms**: Web3form for contact section
+
+## 🌈 Impact
+- **Enhanced Pet Care**: Seamless access to complete pet medical histories
+- **Lost Pet Recovery**: Quick identification and reunion with owners
+- **Fraud Prevention**: Tamper-proof records for pedigree and ownership
+- **Global Standards**: Pushing for unified, blockchain-based pet identification
 
 
+## 💡 How It Works
 
-## Features
+- **Vet Authentication**: Secure login using Gmail (account abstraction) or blockchain wallet
+- **Pet DID Creation**: Vets input pet data to generate a unique DID
+- **Digital ID Card**: Each pet receives a QR-coded digital passport
+- **Verification**: Instant access to pet info via QR code scan
 
-- NextJS and Tailwind CSS landing page and professional dashboard
-- XRPL blockchain integration
-- Decentralized Identity (DID) implementation (currently on devnet)
-- Account abstraction with Kaiju wallet
-- Veterinarian-exclusive DID creation for pets
-- QR code generation for pet identification
-
-## Technical Stack
-
-- Frontend: Next.js, Tailwind CSS
-- Blockchain: XRPL (XRP Ledger)
-- Identity: Decentralized Identifiers (DIDs)
-- Pinata to Direct Link to DID Document on IPFS
-- Wallet: Kaiju (for account abstraction)
-- Web3form for the contact section
-
-## How It Works
-
-1. **Veterinarian Authentication**: 
-   - Vets can log in using their Gmail account if they don't have a blockchain wallet.
-   - The system creates a wallet and an issuerDID for new users.
-
-2. **Pet DID Creation**:
-   - Only authenticated veterinarians can create a DID for an animal.
-   - A user-friendly form allows vets to input pet information and generate a DID.
   
   ![Pet DID Creation](public/images/didset300524.png)
 
@@ -60,35 +74,25 @@ This project started during the XRPL Aquarium program Residency in Paris (april 
       "type": "Public Profile",
       "serviceEndpoint": "https://gateway.pinata.cloud/ipfs/Qmf9o4oDRTnA2AoNxLsYtXPRXNU3TxwhzpbZH5HWbdjLZa"
     }
-  ]
-}
-```
+  ]}
 
-3. **Pet ID Card**:
-   - Each pet receives a digital ID card containing a QR code.
-   - The QR code can be scanned using a mobile app (in development) to verify the pet's identity.
+## 🎬 See It in Action
+Watch our demo video: PawesomeID in Action https://www.youtube.com/watch?v=YU_JEHt5Jpw
 
-## DEMO VIDEO
+## 🗺 Roadmap
 
-https://www.youtube.com/watch?v=YU_JEHt5Jpw
-
-## Future Developments
-
+-  Launch mobile app for QR code scanning and verification
 - Finalization of dynamic DID Document generation
-- example on Pinata https://gateway.pinata.cloud/ipfs/QmXt3ACDHNofyKnfPkbDChBhMf919QeZvZrWeLwJoDFTSN
 - Integration with "heirloom" DID for veterinarian login
-- Biometric authentification
-- Mobile application for QR code scanning and verification
+- Integrate biometric authentication for enhanced security
+- Expand to international markets and partner with major pet care brands
+- Implement AI-driven health prediction based on blockchain data
 
-## Project Goals
 
-1. Provide a secure and transparent identity system for pets
-2. Elevate the status of animals in society through self-sovereign identity
-3. Create a user-friendly interface for veterinarians to manage pet identities
 
-# Getting Started
+## Getting Started
 
-## If you want to test as a veterinarian
+## Test as a veterinarian
 #### Clone this repository
 Then
 ```npm install```
@@ -120,19 +124,9 @@ You will see the dashboard here
 
 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Deploy on Vercel
+## Deployed on Vercel
 
 Public Landing page without authentification is deployed on Vercel
 https://pawesome-id.vercel.app/
@@ -142,10 +136,17 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-## Contact
+## 🤝 Get Involved
 
-Do not hesitate to contact us
-ty@bthasystem.io
+We're always looking for passionate individuals and organizations to join our mission. Whether you're a developer, veterinarian, or pet enthusiast, there's a place for you in the PawesomeID community.
+
+📧 Contact us: ty@bthasystem.io
+
+🌐 Visit our website: https://pawesome-id.vercel.app/
+
+## 🚀 Help Us Make a Difference
+
+Your support can help us create a safer, more connected world for pets and their humans. Join us in revolutionizing pet care with blockchain technology!
 
 ---
 
