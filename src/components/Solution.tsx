@@ -12,7 +12,8 @@ export default function Solution() {
           {t({ en: "Our Solution", fr: "Notre solution" })}
         </h1>
         <div className="flex justify-center items-center mt-12 pb-12">
-          <Image src="/images/solution.png" alt="Pet" width="1200" height="500" />
+          <Image src="/images/solution.png"
+          unoptimized alt="Pet" width="1200" height="500" />
         </div>
       </section>
     </>

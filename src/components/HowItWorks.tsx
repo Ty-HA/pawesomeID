@@ -87,6 +87,7 @@ export default function HowItWorks() {
         </h3>
         <Image
           src="/images/solution.png"
+          unoptimized
           alt="Schema: the vet clinic issues the Pet DID, the owner holds the passport, verifiers check it on the XRP Ledger"
           width={1100}
           height={620}
