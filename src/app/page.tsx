@@ -4,6 +4,8 @@ import Image from "next/image";
 import Contact from "../components/Contact";
 import Problems from "@/components/Problems";
 import Solution from "@/components/Solution";
+import HowItWorks from "@/components/HowItWorks";
+import VetDashboardPreview from "@/components/VetDashboardPreview";
 
 function ButtonStart() {
   return (
@@ -64,6 +66,8 @@ const App = () => {
       {FirstSection()}
       <Problems />
       <Solution />
+      <HowItWorks />
+      <VetDashboardPreview />
       <section className="my-10">
         <div className="md:mx-16 mx-6">
           <h1
