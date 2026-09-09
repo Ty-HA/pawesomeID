@@ -16,11 +16,11 @@ export default function NavBarLanding() {
       >
         <Navbar.Brand href="/">
           <Image
-            src="/logo_full.png"
+            src="/pawesome-id-logo.png"
             alt="Pawesome ID logo"
-            className="ml-4 sm:w-60 w-32 sm:h-10"
-            width="200"
-            height="50"
+            className="ml-4 sm:h-14 h-10 w-auto rounded-xl"
+            width="512"
+            height="341"
           />
         </Navbar.Brand>
         <div className="flex items-center gap-4 md:order-2 mr-4">
