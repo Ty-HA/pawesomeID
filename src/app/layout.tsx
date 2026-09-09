@@ -4,11 +4,10 @@ import { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/app/provider";
 import { Rubik } from "next/font/google";
-//import Head from "next/head";
 
-// import NavBar from "@/components/NavBar";
 import NavBarLanding from "@/components/NavBarLanding";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const rubik = Rubik({ weight: "400", subsets: ["latin"] });
 
@@ -30,11 +29,14 @@ export default function RootLayout({
       </head>
 
       <body className={rubik.className}>
-        <NavBarLanding />
-        <main>
-          <Providers>{children}</Providers>
-        </main>
-        <Footer />
+        {/* La langue englobe navbar + contenu + footer (sélecteur dans la navbar) */}
+        <LanguageProvider>
+          <NavBarLanding />
+          <main>
+            <Providers>{children}</Providers>
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

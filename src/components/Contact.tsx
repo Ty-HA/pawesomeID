@@ -1,32 +1,29 @@
 "use client";
-import React, { FormEvent, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Label, Textarea, TextInput } from "flowbite-react";
+import { useLang } from "@/contexts/LanguageContext";
 
 export default function Contact() {
-
-
+  const { t } = useLang();
   useEffect(() => {
     // Réinitialise le formulaire au chargement de la page
     const formElement = document.getElementById("form") as HTMLFormElement;
     formElement?.reset();
   }, []);
-
-
   return (
     <section
       id="contact"
       className="h-auto flex flex-col items-center justify-center text-center md:ml-10 z-0"
     >
       <h2 className="text-[#ECAA00] text-4xl font-bold md:text-6xl mb-14 mt-14">
-        Contact us or <br /> subscribe to stay tuned!
+        {t({ en: "Contact us or", fr: "Contactez-nous ou" })} <br />
+        {t({ en: "subscribe to stay tuned!", fr: "abonnez-vous pour suivre le lancement !" })}
       </h2>
-
-      {/* Section gauche pour Nom et Message */}
       <div className="flex flex-col md:gap-24 gap-12 md:flex-row mb-24 mx-4">
         <Card className="md:h-[45vh] h-[60vh] rounded-3xl w-full md:w-1/2 animate-fade-in">
           <div className="flex flex-col justify-around w-full px-4">
             <h2 className="text-[#ECAA00] text-2xl font-bold md:text-4xl mb-4">
-              Contact Us
+              {t({ en: "Contact Us", fr: "Contactez-nous" })}
             </h2>
             <form id="form" action="https://api.web3forms.com/submit" method="POST">
               <input
@@ -35,17 +32,17 @@ export default function Contact() {
                 value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY}
               />
               <div className="text-left">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t({ en: "Name", fr: "Nom" })}</Label>
                 <TextInput
                   type="text"
                   name="name"
                   required
-                  placeholder="Your name"
+                  placeholder={t({ en: "Your name", fr: "Votre nom" })}
                   className="mt-2"
                 />
               </div>
               <div className="text-left">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <TextInput
                   type="email"
                   name="email"
@@ -59,7 +56,7 @@ export default function Contact() {
                 <Textarea
                   name="message"
                   required
-                  placeholder="Enter your message"
+                  placeholder={t({ en: "Enter your message", fr: "Votre message" })}
                   className="mt-2"
                 ></Textarea>
               </div>
@@ -74,21 +71,24 @@ export default function Contact() {
                 className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="submit"
               >
-                Send Message
+                {t({ en: "Send Message", fr: "Envoyer" })}
               </Button>
             </form>
           </div>
         </Card>
-
-        {/* Section droite pour Newsletter */}
-
         <Card className="md:h-[45vh] h-[60vh] rounded-3xl w-full md:w-1/2 animate-fade-in">
           <div className="flex flex-col justify-start h-full w-full px-4">
             <h2 className="text-[#ECAA00] text-2xl font-bold md:text-4xl">
-              We will inform you about our launch!
+              {t({
+                en: "We will inform you about our launch!",
+                fr: "Nous vous préviendrons du lancement !",
+              })}
             </h2>
             <p className="text-base text-white sm:text-xl">
-              Enter your email if you want to be informed about our launch.
+              {t({
+                en: "Enter your email if you want to be informed about our launch.",
+                fr: "Laissez votre e-mail pour être informé·e du lancement.",
+              })}
             </p>
             <form id="form" action="https://api.web3forms.com/submit" method="POST">
               <input
@@ -97,7 +97,7 @@ export default function Contact() {
                 value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY}
               />
               <div className="text-left pb-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <TextInput
                   type="email"
                   name="email"
@@ -117,10 +117,9 @@ export default function Contact() {
                 className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="submit"
               >
-                Subscribe
+                {t({ en: "Subscribe", fr: "S'abonner" })}
               </Button>
             </form>
-            
           </div>
         </Card>
       </div>
