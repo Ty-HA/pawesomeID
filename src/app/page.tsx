@@ -13,7 +13,7 @@ function ButtonStart() {
   return (
     <a
       href="#contact"
-      className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] sm:px-12 px-4 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap mt-8 md:mt-12"
+      className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] transition-all duration-200 motion-safe:hover:scale-105 hover:shadow-lg hover:shadow-[#35C4E5]/40 active:scale-95 text-[#0d1230] sm:px-12 px-4 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap mt-8 md:mt-12"
     >
       {t({ en: "Stay tuned! →", fr: "Restez informés ! →" })}
     </a>
@@ -23,7 +23,7 @@ function ButtonStart() {
 const FirstSection = () => {
   const { t } = useLang();
   return (
-    <section className="flex sm:flex-row flex-col-reverse justify-center items-center mt-16 pb-20 w-full md:h-[75vh] h-auto">
+    <section className="flex sm:flex-row flex-col-reverse justify-center items-center mt-16 pb-20 w-full md:h-[75vh] h-auto bg-[radial-gradient(ellipse_80%_60%_at_18%_12%,rgba(53,196,229,0.16),transparent_60%),radial-gradient(ellipse_60%_50%_at_85%_88%,rgba(0,187,95,0.10),transparent_60%)]">
       <div className="sm:w-1/2 xl:pl-60 lg:pl-32 animate-slide-in-up items-center px-4">
         <h1 className="text-[#35C4E5] mt-16 md:mt-4 md:text-7xl font-semibold whitespace-normal text-4xl sm:pb-6">
           {t({ en: "Your Pawesome passport", fr: "Votre passeport Pawesome" })}

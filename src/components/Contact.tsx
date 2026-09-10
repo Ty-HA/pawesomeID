@@ -61,14 +61,14 @@ export default function Contact() {
                 ></Textarea>
               </div>
               <input
-                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] transition-all duration-200 motion-safe:hover:scale-105 hover:shadow-lg hover:shadow-[#35C4E5]/40 active:scale-95 text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="hidden"
                 name="redirect"
                 value="https://web3forms.com/success"
               />
               <Button
                 size="md"
-                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] mt-8 py-2 px-4 rounded-xl mx-auto"
+                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] transition-all duration-200 motion-safe:hover:scale-105 hover:shadow-lg hover:shadow-[#35C4E5]/40 active:scale-95 text-[#0d1230] mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="submit"
               >
                 {t({ en: "Send Message", fr: "Envoyer" })}
@@ -106,7 +106,7 @@ export default function Contact() {
                   className="mt-2"
                 />
                 <input
-                  className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                  className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] transition-all duration-200 motion-safe:hover:scale-105 hover:shadow-lg hover:shadow-[#35C4E5]/40 active:scale-95 text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                   type="hidden"
                   name="redirect"
                   value="https://web3forms.com/success"
@@ -114,7 +114,7 @@ export default function Contact() {
               </div>
               <Button
                 size="md"
-                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] transition-all duration-200 motion-safe:hover:scale-105 hover:shadow-lg hover:shadow-[#35C4E5]/40 active:scale-95 text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="submit"
               >
                 {t({ en: "Subscribe", fr: "S'abonner" })}

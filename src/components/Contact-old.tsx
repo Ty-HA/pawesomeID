@@ -62,7 +62,7 @@ export default function Contact() {
               rows={8}
             />
           </div>
-          <Button className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] sm:px-12 px-4 mt-8 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap" type="submit">
+          <Button className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] transition-all duration-200 motion-safe:hover:scale-105 hover:shadow-lg hover:shadow-[#35C4E5]/40 active:scale-95 text-[#0d1230] sm:px-12 px-4 mt-8 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap" type="submit">
             Send message
           </Button>
         </form>
