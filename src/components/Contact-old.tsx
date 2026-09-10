@@ -11,7 +11,7 @@ export default function Contact() {
     >
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md mb-8 mt-24 lg:mt-10 se:mt-24 se:mb-24">
         <div className="mb-8">
-          <h2 className="text-[#ECAA00] text-green text-2xl font-bold md:text-4xl animate-fade-in">
+          <h2 className="text-[#35C4E5] text-green text-2xl font-bold md:text-4xl animate-fade-in">
           Stay tuned!
           </h2>
           <p className="mt-4 lg:mb-8 text-center text-base text-white dark:text-white sm:text-xl">
@@ -62,7 +62,7 @@ export default function Contact() {
               rows={8}
             />
           </div>
-          <Button className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white sm:px-12 px-4 mt-8 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap" type="submit">
+          <Button className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] sm:px-12 px-4 mt-8 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap" type="submit">
             Send message
           </Button>
         </form>

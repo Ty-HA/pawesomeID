@@ -15,14 +15,14 @@ export default function Contact() {
       id="contact"
       className="h-auto flex flex-col items-center justify-center text-center md:ml-10 z-0"
     >
-      <h2 className="text-[#ECAA00] text-4xl font-bold md:text-6xl mb-14 mt-14">
+      <h2 className="text-[#35C4E5] text-4xl font-bold md:text-6xl mb-14 mt-14">
         {t({ en: "Contact us or", fr: "Contactez-nous ou" })} <br />
         {t({ en: "subscribe to stay tuned!", fr: "abonnez-vous pour suivre le lancement !" })}
       </h2>
       <div className="flex flex-col md:gap-24 gap-12 md:flex-row mb-24 mx-4">
         <Card className="md:h-[45vh] h-[60vh] rounded-3xl w-full md:w-1/2 animate-fade-in">
           <div className="flex flex-col justify-around w-full px-4">
-            <h2 className="text-[#ECAA00] text-2xl font-bold md:text-4xl mb-4">
+            <h2 className="text-[#35C4E5] text-2xl font-bold md:text-4xl mb-4">
               {t({ en: "Contact Us", fr: "Contactez-nous" })}
             </h2>
             <form id="form" action="https://api.web3forms.com/submit" method="POST">
@@ -61,14 +61,14 @@ export default function Contact() {
                 ></Textarea>
               </div>
               <input
-                className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="hidden"
                 name="redirect"
                 value="https://web3forms.com/success"
               />
               <Button
                 size="md"
-                className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="submit"
               >
                 {t({ en: "Send Message", fr: "Envoyer" })}
@@ -78,7 +78,7 @@ export default function Contact() {
         </Card>
         <Card className="md:h-[45vh] h-[60vh] rounded-3xl w-full md:w-1/2 animate-fade-in">
           <div className="flex flex-col justify-start h-full w-full px-4">
-            <h2 className="text-[#ECAA00] text-2xl font-bold md:text-4xl">
+            <h2 className="text-[#35C4E5] text-2xl font-bold md:text-4xl">
               {t({
                 en: "We will inform you about our launch!",
                 fr: "Nous vous préviendrons du lancement !",
@@ -106,7 +106,7 @@ export default function Contact() {
                   className="mt-2"
                 />
                 <input
-                  className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                  className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                   type="hidden"
                   name="redirect"
                   value="https://web3forms.com/success"
@@ -114,7 +114,7 @@ export default function Contact() {
               </div>
               <Button
                 size="md"
-                className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
+                className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-lg text-white mt-8 py-2 px-4 rounded-xl mx-auto"
                 type="submit"
               >
                 {t({ en: "Subscribe", fr: "S'abonner" })}

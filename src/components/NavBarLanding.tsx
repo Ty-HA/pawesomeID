@@ -18,7 +18,7 @@ export default function NavBarLanding() {
           <Image
             src="/pawesome-id-logo.png"
             alt="Pawesome ID logo"
-            className="ml-4 sm:h-14 h-10 w-auto rounded-xl"
+            className="ml-4 sm:h-20 h-12 w-auto rounded-xl"
             width="512"
             height="341"
           />
@@ -30,7 +30,7 @@ export default function NavBarLanding() {
         <Navbar.Collapse>
           <Navbar.Link
             href="#contact"
-            className="text-4xl flex justify-left items-center text-[#ECAA00] mr-16"
+            className="text-4xl flex justify-left items-center text-[#35C4E5] mr-16"
           >
             <FontAwesomeIcon icon={faEnvelope} className="mr-4" />
             {t({ en: "Stay tuned!", fr: "Restez informés !" })}

@@ -13,7 +13,7 @@ function ButtonStart() {
   return (
     <a
       href="#contact"
-      className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white sm:px-12 px-4 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap mt-8 md:mt-12"
+      className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] sm:px-12 px-4 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap mt-8 md:mt-12"
     >
       {t({ en: "Stay tuned! →", fr: "Restez informés ! →" })}
     </a>
@@ -25,7 +25,7 @@ const FirstSection = () => {
   return (
     <section className="flex sm:flex-row flex-col-reverse justify-center items-center mt-16 pb-20 w-full md:h-[75vh] h-auto">
       <div className="sm:w-1/2 xl:pl-60 lg:pl-32 animate-slide-in-up items-center px-4">
-        <h1 className="text-[#ECAA00] mt-16 md:mt-4 md:text-7xl font-semibold whitespace-normal text-4xl sm:pb-6">
+        <h1 className="text-[#35C4E5] mt-16 md:mt-4 md:text-7xl font-semibold whitespace-normal text-4xl sm:pb-6">
           {t({ en: "Your Pawesome passport", fr: "Votre passeport Pawesome" })}
         </h1>
         <p className="text-gray-300 whitespace-normal my-5 md:text-3xl w-full text-2xl">
@@ -72,7 +72,7 @@ const App = () => {
       <VetDashboardPreview />
       <section className="my-10">
         <div className="md:mx-16 mx-6">
-          <h1 className="text-[#ECAA00] xl:text-3xl lg:text-2xl text-xl font-semibold whitespace-normal my-4">
+          <h1 className="text-[#35C4E5] xl:text-3xl lg:text-2xl text-xl font-semibold whitespace-normal my-4">
             {t({ en: "What is DiD?", fr: "C'est quoi, un DiD ?" })}
           </h1>
           <p className="text-white xl:text-xl lg:text-2xl text-m whitespace-normal my-4">
@@ -81,7 +81,7 @@ const App = () => {
               fr: "Un DiD, c'est comme une carte d'identité numérique qu'aucune entreprise ni aucun gouvernement ne contrôle seul. Il permet de prouver qui l'on est en ligne, sans dépendre d'une autorité centrale.",
             })}
           </p>
-          <h1 className="text-[#ECAA00] xl:text-3xl lg:text-2xl text-xl font-semibold whitespace-normal my-4 pt-10">
+          <h1 className="text-[#35C4E5] xl:text-3xl lg:text-2xl text-xl font-semibold whitespace-normal my-4 pt-10">
             {t({
               en: "What is Self Sovereign Identity?",
               fr: "C'est quoi, l'identité auto-souveraine (SSI) ?",

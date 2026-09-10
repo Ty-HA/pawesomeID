@@ -49,7 +49,7 @@ export default function HowItWorks() {
   const { t } = useLang();
   return (
     <section id="how-it-works" className="w-full py-20">
-      <h2 className="text-[#ECAA00] font-semibold text-center xl:text-5xl lg:text-4xl text-3xl px-4">
+      <h2 className="text-[#35C4E5] font-semibold text-center xl:text-5xl lg:text-4xl text-3xl px-4">
         {t({ en: "How does it work?", fr: "Comment ça marche ?" })}
       </h2>
       <p className="text-gray-300 text-center mt-4 xl:text-2xl text-lg px-6">
@@ -63,13 +63,13 @@ export default function HowItWorks() {
         {STEPS.map((s) => (
           <div
             key={s.n}
-            className="relative bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col hover:border-[#ECAA00]/60 transition-colors"
+            className="relative bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col hover:border-[#35C4E5]/60 transition-colors"
           >
             <div className="flex items-center gap-4">
-              <span className="bg-[#ECAA00] text-white font-bold rounded-full w-10 h-10 flex items-center justify-center text-lg shrink-0">
+              <span className="bg-[#35C4E5] text-[#0d1230] font-bold rounded-full w-10 h-10 flex items-center justify-center text-lg shrink-0">
                 {s.n}
               </span>
-              <i className={`${s.icon} text-[#ECAA00] text-2xl`} aria-hidden />
+              <i className={`${s.icon} text-[#35C4E5] text-2xl`} aria-hidden />
             </div>
             <h3 className="text-white font-semibold text-xl mt-4">{t(s.title)}</h3>
             <p className="text-gray-400 mt-2 leading-relaxed">{t(s.text)}</p>

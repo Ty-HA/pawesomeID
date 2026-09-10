@@ -70,7 +70,7 @@ export default function VetDashboardPreview() {
 
           <div className="flex bg-[#0d1230]">
             <aside className="hidden sm:flex flex-col gap-1 w-44 shrink-0 p-4 text-sm text-gray-300">
-              <span className="text-[#ECAA00] font-bold mb-3">🐾 Pawesome ID</span>
+              <span className="text-[#35C4E5] font-bold mb-3">🐾 Pawesome ID</span>
               <span className="bg-white/10 text-white rounded-lg px-3 py-2 font-medium">
                 {t({ en: "Patients", fr: "Patients" })}
               </span>
@@ -90,7 +90,7 @@ export default function VetDashboardPreview() {
                 <h3 className="font-bold text-gray-800 text-lg">
                   {t({ en: "My patients", fr: "Mes patients" })}
                 </h3>
-                <span className="bg-[#ECAA00] text-white text-sm font-semibold rounded-full px-4 py-1.5">
+                <span className="bg-[#35C4E5] text-[#0d1230] text-sm font-semibold rounded-full px-4 py-1.5">
                   {t({ en: "+ Issue a credential", fr: "+ Émettre une attestation" })}
                 </span>
               </div>

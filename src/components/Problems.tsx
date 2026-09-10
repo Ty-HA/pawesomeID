@@ -8,7 +8,7 @@ const ButtonStart = () => {
   return (
     <a
       href="#contact"
-      className="bg-[#ECAA00] hover:bg-[#c48200] active:bg-[#f6b400] text-white sm:px-12 px-4 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap mt-8 md:mt-12"
+      className="bg-[#35C4E5] hover:bg-[#1E9FBF] active:bg-[#5AD2EE] text-[#0d1230] sm:px-12 px-4 py-2 sm:py-1.5 md:py-3 text-lg font-semibold rounded-full whitespace-nowrap mt-8 md:mt-12"
     >
       {t({ en: "Stay tuned! →", fr: "Restez informés ! →" })}
     </a>

@@ -60,13 +60,13 @@ export function useLang() {
 export function LangSwitch() {
   const { lang, setLang } = useLang();
   return (
-    <div className="flex items-center rounded-full border border-[#ECAA00]/60 overflow-hidden text-sm font-semibold">
+    <div className="flex items-center rounded-full border border-[#35C4E5]/60 overflow-hidden text-sm font-semibold">
       {(["en", "fr"] as const).map((l) => (
         <button
           key={l}
           onClick={() => setLang(l)}
           className={`px-3 py-1 uppercase transition-colors ${
-            lang === l ? "bg-[#ECAA00] text-white" : "text-[#ECAA00] hover:bg-[#ECAA00]/10"
+            lang === l ? "bg-[#35C4E5] text-[#0d1230]" : "text-[#35C4E5] hover:bg-[#35C4E5]/10"
           }`}
           aria-pressed={lang === l}
         >
