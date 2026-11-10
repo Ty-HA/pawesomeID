@@ -24,7 +24,7 @@ export const saveSession = async (session: Session) => {
     ttl: 60 * 60 * 24 * 30, // 30 days
   });
 
-  cookies().set(process.env.SESSION_COOKIE_NAME, sessionCookie, {
+  (await cookies()).set(process.env.SESSION_COOKIE_NAME, sessionCookie, {
     httpOnly: true,
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 30,
@@ -36,10 +36,7 @@ export const saveSession = async (session: Session) => {
  * @returns User session
  */
 export const getSession = async () => {
-  const isSignedIn = cookies().has(process.env.SESSION_COOKIE_NAME);
-
-  if (!isSignedIn) return null;
-  const sessionCookie = cookies().get(process.env.SESSION_COOKIE_NAME);
+  const sessionCookie = (await cookies()).get(process.env.SESSION_COOKIE_NAME);
 
   if (!sessionCookie) return null;
 
@@ -71,7 +68,7 @@ export const getSession = async () => {
 };
 
 export const removeSession = async () => {
-  cookies().delete(process.env.SESSION_COOKIE_NAME);
+  (await cookies()).delete(process.env.SESSION_COOKIE_NAME);
   redirect('/login');
 };
 
